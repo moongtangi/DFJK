@@ -15,7 +15,14 @@ public class Notespeedslider : MonoBehaviour
 
     public GameObject menu;
     public enum Key { k0, k1, k2, k3 }; // 키 리스트 define 
-    public static Dictionary<Key, KeyCode> keys = new Dictionary<Key, KeyCode>(); // keys라는 dictionary 생성
+    public static Dictionary<Key, KeyCode> keys = new Dictionary<Key, KeyCode>
+    {
+        { Key.k0, KeyCode.D },
+        { Key.k1, KeyCode.F },
+        { Key.k2, KeyCode.J },
+        { Key.k3, KeyCode.K }
+    };// keys라는 dictionary 생성과 각 키에 기본키 DFJK 삽입
+
     int ki = -1;
     public Text[] txt;  // 커스텀 키 만들때 뜨는 텍스트 정의
 
@@ -29,17 +36,7 @@ public class Notespeedslider : MonoBehaviour
         GameManager.offset = (ofse.value / 10f);
         ofseenter.text = GameManager.offset.ToString("F1");
     }
-    private void Awake()
-    {
-        //각 키에 기본키 DFJK 삽입
-        keys.Add(Key.k0, KeyCode.D);
-        keys.Add(Key.k1, KeyCode.F);
-        keys.Add(Key.k2, KeyCode.J);
-        keys.Add(Key.k3, KeyCode.K);
 
-        nospenter.onEndEdit.AddListener(Nospinput);
-        ofseenter.onEndEdit.AddListener(Ofseinput);
-    }
 
     private void OnGUI()
     {
@@ -84,7 +81,7 @@ public class Notespeedslider : MonoBehaviour
         }
     }
 
-    void Nospinput(string inp)
+    public void Nospinput(string inp)
     {
         if (float.TryParse(inp, out float input) && ((float.Parse(inp))*10) >= nosp.minValue && ((float.Parse(inp))*10) <= nosp.maxValue)
         {
@@ -98,7 +95,7 @@ public class Notespeedslider : MonoBehaviour
         }
     }
 
-    void Ofseinput(string inp)
+    public void Ofseinput(string inp)
     {
         if (float.TryParse(inp, out float input) && ((float.Parse(inp)) * 10) >= ofse.minValue && ((float.Parse(inp)) * 10) <= ofse.maxValue)
         {
