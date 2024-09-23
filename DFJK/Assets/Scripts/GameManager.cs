@@ -1,6 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,9 +15,22 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public ObjectPoolManager pool;
     public NotesCreate makenoter;
+    public static float notespeed = 11.4f;
+    public static float offset = 0f;
+
+
+
 
     void Awake()
     {
         instance = this;
+
+
     }
+
+
+
+    
+
 }
+  
