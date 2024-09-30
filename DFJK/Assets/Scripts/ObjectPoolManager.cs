@@ -12,10 +12,9 @@ public class ObjectPoolManager : MonoBehaviour
 
         for (int index = 0; index < pools.Length; index++){
             pools[index] = new List<GameObject>();
-        } // pools = { [0(act), 0(act), 0(act)]<<, [ ] }
+        }
     }
-
-    public GameObject Get(int index)
+    public GameObject Get(int index, int anchovy)
     {
         GameObject select = null;
 
@@ -32,6 +31,7 @@ public class ObjectPoolManager : MonoBehaviour
             pools[index].Add(select);
         }
 
+        select.GetComponent<Notes>().line = anchovy;
         return select;
     }
 }
