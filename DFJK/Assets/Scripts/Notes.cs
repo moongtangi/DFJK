@@ -12,7 +12,7 @@ public class Notes : MonoBehaviour
 
     void LateUpdate()
     {
-        transform.Translate(Vector2.down * 11.4f * Time.deltaTime);
+        transform.Translate(Vector2.down * GameManager.notespeed * Time.deltaTime);
         if (transform.position.y < -3)
         {
             gameObject.SetActive(false);
