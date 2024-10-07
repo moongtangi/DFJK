@@ -22,12 +22,12 @@ public class Notespeedslider : MonoBehaviour
     public void NoteSpeed()
     {
         GameManager.notespeed = (nosp.value / 10f);
-        nospenter.text = GameManager.notespeed.ToString("F1");
+        nospenter.text = GameManager.notespeed.ToString("F1"); //슬라이더 변경 값을 변수에 저장
     }
     public void Offset()
     {
         GameManager.offset = (ofse.value / 10f);
-        ofseenter.text = GameManager.offset.ToString("F1");
+        ofseenter.text = GameManager.offset.ToString("F1"); //슬라이더 변경 값을 변수에 저장
     }
     private void Awake()
     {
@@ -37,8 +37,6 @@ public class Notespeedslider : MonoBehaviour
         keys.Add(Key.k2, KeyCode.J);
         keys.Add(Key.k3, KeyCode.K);
 
-        nospenter.onEndEdit.AddListener(Nospinput);
-        ofseenter.onEndEdit.AddListener(Ofseinput);
     }
 
     private void OnGUI()
