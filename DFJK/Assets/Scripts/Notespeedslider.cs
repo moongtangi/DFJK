@@ -14,10 +14,10 @@ public class Notespeedslider : MonoBehaviour
     public Slider ofse;
 
     public GameObject menu;
-    public enum Key { k0, k1, k2, k3 }; // Å° ¸®½ºÆ® define 
-    public static Dictionary<Key, KeyCode> keys = new Dictionary<Key, KeyCode>(); // keys¶ó´Â dictionary »ı¼º
+    public enum Key { k0, k1, k2, k3 }; // í‚¤ ë¦¬ìŠ¤íŠ¸ define 
+    public static Dictionary<Key, KeyCode> keys = new Dictionary<Key, KeyCode>(); // keysë¼ëŠ” dictionary ìƒì„±
     int ki = -1;
-    public Text[] txt;  // Ä¿½ºÅÒ Å° ¸¸µé¶§ ¶ß´Â ÅØ½ºÆ® Á¤ÀÇ
+    public Text[] txt;  // ì»¤ìŠ¤í…€ í‚¤ ë§Œë“¤ë•Œ ëœ¨ëŠ” í…ìŠ¤íŠ¸ ì •ì˜
 
     public void NoteSpeed()
     {
@@ -31,7 +31,7 @@ public class Notespeedslider : MonoBehaviour
     }
     private void Awake()
     {
-        //°¢ Å°¿¡ ±âº»Å° DFJK »ğÀÔ
+        //ê° í‚¤ì— ê¸°ë³¸í‚¤ DFJK ì‚½ì…
         keys.Add(Key.k0, KeyCode.D);
         keys.Add(Key.k1, KeyCode.F);
         keys.Add(Key.k2, KeyCode.J);
@@ -49,7 +49,7 @@ public class Notespeedslider : MonoBehaviour
         {
             if (keyEvent.keyCode != keys[Key.k0] && keyEvent.keyCode != keys[Key.k1] && keyEvent.keyCode != keys[Key.k2] && keyEvent.keyCode != keys[Key.k3])
                 keys[(Key)ki] = keyEvent.keyCode;
-            // ¸¸¾à ÀÌ¹Ì ÀÖ´Â Å°°¡ ÁöÁ¤µÆ´Ù¸é ÆĞ½º
+            // ë§Œì•½ ì´ë¯¸ ìˆëŠ” í‚¤ê°€ ì§€ì •ëë‹¤ë©´ íŒ¨ìŠ¤
             ki = -1;
 
         }
