@@ -14,7 +14,7 @@ public class ObjectPoolManager : MonoBehaviour
             pools[index] = new List<GameObject>();
         }
     }
-    public GameObject Get(int index, int anchovy)
+    public GameObject Get(int index, int anchovy, int panju)
     {
         GameObject select = null;
 
@@ -32,6 +32,7 @@ public class ObjectPoolManager : MonoBehaviour
         }
 
         select.GetComponent<Notes>().line = anchovy;
+        select.GetComponent<Notes>().panjung = panju+ (int)(1000*9.125f/GameManager.notespeed);
         return select;
     }
 }
