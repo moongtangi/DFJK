@@ -2,25 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;    
 
 public class GameManager : MonoBehaviour
 {
     public NotesCreate Create;
     public static GameManager instance;
+    public GameObject Pausemenu;
+    public Text Countdown;
+
     public static float notespeed = 11.4f;
     public static float offset = 0f;
+
     public bool pause;
-    public int pams = -4000;
-    public static int resums = -4000;
+    public int pams = -4000;  //pause ms
+    public static int resums = -4000, resums_dummy;  // resume ms
     private Stopwatch stopwatch = new Stopwatch();
-    float resumetime;
-    public GameObject Pausemenu;
-    long test;
+    public bool resume;
 
     void Awake()
     {
         instance = this;
-        resums = -4000;
+        resums = -4000; //초반 기본 오프셋같은 느낌
     }
 
     private void Update()
@@ -45,36 +49,43 @@ public class GameManager : MonoBehaviour
             Pause();
         }
     }
-    void Pause()
+    void Pause() //일시정지
     {
-        if (pams <NotesCreate.nowms)
+        if (pams < NotesCreate.nowms)  // 계속하기를 누른 뒤 바로 뒤에 esc눌러서 게임 돌리는거 방지
             pams = NotesCreate.nowms;
         resums = NotesCreate.nowms;
+        resums_dummy = resums; 
         pause = true;
-        Create.stopwatch.Stop();
+        Create.stopwatch.Stop();  //nowms의 증가를 멈추기
         Create.stopwatch.Reset();
         Pausemenu.SetActive(true);
-        test = Create.stopwatch.ElapsedMilliseconds;
-        UnityEngine.Debug.Log(NotesCreate.nowms + " " + test + " " + pams + " " + resums);
     }
-    void DePause()
+    void DePause() //일시정지 해제
     {
-        pause = false;
-        stopwatch.Start();
+        pause = false; 
+        stopwatch.Start();  // 3초 카운트다운 시작
         Pausemenu.SetActive(false);
-        ResumeAfterDelay(3f);
-        while (resums > (pams - 1000))
-        {
-            resums = pams - (int)stopwatch.ElapsedMilliseconds;
-            //UnityEngine.Debug.Log(NotesCreate.nowms);
-        }
-        stopwatch.Stop();
-        stopwatch.Reset();
+        resume = true;
+        Countdown.gameObject.SetActive(true);
 
     }
-    IEnumerator ResumeAfterDelay(float delay)
+    private void LateUpdate()
     {
-        yield return new WaitForSecondsRealtime(delay); // 실제 시간을 기준으로 3초 대기
-        Create.stopwatch.Start();
+        if (resume)
+        {
+            if (resums > (pams - (int)(1000 * 9.25f / notespeed)))  // 노트 위로 올리기
+                resums = resums_dummy - (int)stopwatch.ElapsedMilliseconds*4;
+
+            Countdown.text = (3- (int)(stopwatch.ElapsedMilliseconds / 1000)).ToString();  // 카운트다운에 숫자 띄우기
+
+            if ((int)stopwatch.ElapsedMilliseconds >= 3000)  // 3초 지났을 때 실행할 것들
+            {
+                Create.stopwatch.Start();  // nowms 가동
+                resume = false;
+                stopwatch.Stop();
+                stopwatch.Reset();
+                Countdown.gameObject.SetActive(false);
+            }
+        }
     }
 }

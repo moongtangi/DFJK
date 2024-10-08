@@ -12,12 +12,10 @@ public class Notes : MonoBehaviour
 
     void LateUpdate()
     {
-        //transform.Translate(Vector2.down * GameManager.notespeed * Time.deltaTime);
-        //6.125~-3
         transform.position = new Vector3(notePosition[line], (-3 + (GameManager.notespeed)*(panjung - NotesCreate.nowms)/1000), 0);
-        /*if (transform.position.y < -3)
+        if (transform.position.y < -5.125)
         {
             gameObject.SetActive(false);
-        }*/
+        }
     }
 }
