@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        resums = -4000; //ÃÊ¹İ ±âº» ¿ÀÇÁ¼Â°°Àº ´À³¦
+        resums = -4000; //ì´ˆë°˜ ê¸°ë³¸ ì˜¤í”„ì…‹ê°™ì€ ëŠë‚Œ
     }
 
     private void Update()
@@ -49,21 +49,21 @@ public class GameManager : MonoBehaviour
             Pause();
         }
     }
-    void Pause() //ÀÏ½ÃÁ¤Áö
+    void Pause() //ì¼ì‹œì •ì§€
     {
-        if (pams < NotesCreate.nowms)  // °è¼ÓÇÏ±â¸¦ ´©¸¥ µÚ ¹Ù·Î µÚ¿¡ esc´­·¯¼­ °ÔÀÓ µ¹¸®´Â°Å ¹æÁö
+        if (pams < NotesCreate.nowms)  // ê³„ì†í•˜ê¸°ë¥¼ ëˆ„ë¥¸ ë’¤ ë°”ë¡œ ë’¤ì— escëˆŒëŸ¬ì„œ ê²Œì„ ëŒë¦¬ëŠ”ê±° ë°©ì§€
             pams = NotesCreate.nowms;
         resums = NotesCreate.nowms;
         resums_dummy = resums; 
         pause = true;
-        Create.stopwatch.Stop();  //nowmsÀÇ Áõ°¡¸¦ ¸ØÃß±â
+        Create.stopwatch.Stop();  //nowmsì˜ ì¦ê°€ë¥¼ ë©ˆì¶”ê¸°
         Create.stopwatch.Reset();
         Pausemenu.SetActive(true);
     }
-    void DePause() //ÀÏ½ÃÁ¤Áö ÇØÁ¦
+    void DePause() //ì¼ì‹œì •ì§€ í•´ì œ
     {
         pause = false; 
-        stopwatch.Start();  // 3ÃÊ Ä«¿îÆ®´Ù¿î ½ÃÀÛ
+        stopwatch.Start();  // 3ì´ˆ ì¹´ìš´íŠ¸ë‹¤ìš´ ì‹œì‘
         Pausemenu.SetActive(false);
         resume = true;
         Countdown.gameObject.SetActive(true);
@@ -73,14 +73,14 @@ public class GameManager : MonoBehaviour
     {
         if (resume)
         {
-            if (resums > (pams - (int)(1000 * 9.25f / notespeed)))  // ³ëÆ® À§·Î ¿Ã¸®±â
+            if (resums > (pams - (int)(1000 * 9.25f / notespeed)))  // ë…¸íŠ¸ ìœ„ë¡œ ì˜¬ë¦¬ê¸°
                 resums = resums_dummy - (int)stopwatch.ElapsedMilliseconds*4;
 
-            Countdown.text = (3- (int)(stopwatch.ElapsedMilliseconds / 1000)).ToString();  // Ä«¿îÆ®´Ù¿î¿¡ ¼ıÀÚ ¶ç¿ì±â
+            Countdown.text = (3- (int)(stopwatch.ElapsedMilliseconds / 1000)).ToString();  // ì¹´ìš´íŠ¸ë‹¤ìš´ì— ìˆ«ì ë„ìš°ê¸°
 
-            if ((int)stopwatch.ElapsedMilliseconds >= 3000)  // 3ÃÊ Áö³µÀ» ¶§ ½ÇÇàÇÒ °Íµé
+            if ((int)stopwatch.ElapsedMilliseconds >= 3000)  // 3ì´ˆ ì§€ë‚¬ì„ ë•Œ ì‹¤í–‰í•  ê²ƒë“¤
             {
-                Create.stopwatch.Start();  // nowms °¡µ¿
+                Create.stopwatch.Start();  // nowms ê°€ë™
                 resume = false;
                 stopwatch.Stop();
                 stopwatch.Reset();
