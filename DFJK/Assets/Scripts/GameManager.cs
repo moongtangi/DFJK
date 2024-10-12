@@ -60,7 +60,11 @@ public class GameManager : MonoBehaviour
         Create.stopwatch.Reset();
         Pausemenu.SetActive(true);
     }
+<<<<<<< Updated upstream
     void DePause() //ÀÏ½ÃÁ¤Áö ÇØÁ¦
+=======
+    public void DePause() //ì¼ì‹œì •ì§€ í•´ì œ
+>>>>>>> Stashed changes
     {
         pause = false; 
         stopwatch.Start();  // 3ÃÊ Ä«¿îÆ®´Ù¿î ½ÃÀÛ
