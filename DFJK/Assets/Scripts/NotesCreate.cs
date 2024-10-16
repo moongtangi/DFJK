@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System;
 
 public class NotesCreate : MonoBehaviour
@@ -9,8 +10,12 @@ public class NotesCreate : MonoBehaviour
     int bpm = 70;
     int i = 0;
     List<string> pattern = new List<string>();
-    public int wit=0;
-    int nowms=0, spoint=0, dura=0, epoint=0;
+    public int wit = 0;
+    int spoint = 0, dura = 0, epoint = 0;
+    public static int nowms = 0;
+    public Stopwatch stopwatch = new Stopwatch(); // ms를 구현할 수 있는 정확한 stopwatch 생성
+    private bool End = true;
+    public ObjectPoolManager pool;
 
     void Start()
     {
@@ -18,11 +23,12 @@ public class NotesCreate : MonoBehaviour
         bpm = int.Parse(pattern[0][6..]);
         pattern.RemoveAt(0); /* BPM 읽어오고 pattern 리스트에서 삭제 */
         StartCoroutine(Placer()); /* IEnumerator Placer() 시작 */
+        stopwatch.Start(); // ms 시작
     }
 
-    void FixedUpdate() // 설정에서 Time뭐시깽이 설정 맞춰둠(0.01로)
+    void Update()
     {
-        nowms++;
+        nowms = (int)stopwatch.ElapsedMilliseconds + GameManager.resums;
     }
 
     IEnumerator Placer()
@@ -42,25 +48,27 @@ public class NotesCreate : MonoBehaviour
             dura = int.Parse(parts[3]);
             epoint = int.Parse(parts[5].Split(':')[0]);
         }
-        else{} // 노트 형식이 아닌 입력이 들어왔을 때. 이후에 수정.
-        
-        while (spoint >= nowms - 100) // 화면 위에서 노트 판정선까지 내려오는 시간(녹숫)을 배속별로 측정해서 100 대신 넣어놓기
+        else { StopCoroutine("Placer"); End = false; } // 노트 형식이 아닌 입력이 들어왔을 때. 이후에 수정.
+
+        while (spoint >= nowms)
         {
             yield return new WaitForFixedUpdate();
         }
-        switch (wit){
+        switch (wit)
+        {
             case 0:
             case 3:
-                GameManager.instance.pool.Get(0, wit);
+                pool.Get(0, wit, spoint);
                 break;
             default:
-                GameManager.instance.pool.Get(1, wit);
+                pool.Get(1, wit, spoint);
                 break;
         }
-        
+
         i++;
-        StartCoroutine(Placer());
-        
+        if (End)
+            StartCoroutine(Placer());
+
         /*
         char gubunja = pattern[i][0];
         if (gubunja == '完')
