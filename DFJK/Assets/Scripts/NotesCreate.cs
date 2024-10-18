@@ -19,7 +19,7 @@ public class NotesCreate : MonoBehaviour
 
     void Start()
     {
-        pattern = new List<string>(File.ReadAllLines(@"Assets/Patterns/pattern1.txt")); /* 패턴 파일 읽어옴 */
+        pattern = new List<string>(Resources.Load<TextAsset>("Patterns/pattern1").text.Split(new[] { "\r\n", "\n" }, System.StringSplitOptions.None)); /* 패턴 파일 읽어옴 */
         bpm = int.Parse(pattern[0][6..]);
         pattern.RemoveAt(0); /* BPM 읽어오고 pattern 리스트에서 삭제 */
         StartCoroutine(Placer()); /* IEnumerator Placer() 시작 */
