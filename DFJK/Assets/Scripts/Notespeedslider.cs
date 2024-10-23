@@ -9,9 +9,9 @@ public class Notespeedslider : MonoBehaviour
 {
 
     public InputField nospenter;
-    public Slider nosp;
+    public UnityEngine.UI.Slider nosp;
     public InputField ofseenter;
-    public Slider ofse;
+    public UnityEngine.UI.Slider ofse;
 
     public GameObject menu;
     public enum Key { k0, k1, k2, k3 }; // 키 리스트 define 
@@ -24,7 +24,15 @@ public class Notespeedslider : MonoBehaviour
     }; // keys라는 dictionary 생성과 동시에 각 키에 기본키 DFJK 삽입
     int ki = -1;
     public Text[] txt;  // 커스텀 키 만들때 뜨는 텍스트 정의
-
+    bool isKeyAlreadyAssigned;
+    public void Start()
+    {
+        for (int i = 0; i < txt.Length; i++)
+        {
+            if (txt[i].text != keys[(Key)i].ToString())
+                txt[i].text = keys[(Key)i].ToString();
+        }
+    }
     public void NoteSpeed()
     {
         GameManager.notespeed = (nosp.value / 10f);
@@ -37,17 +45,20 @@ public class Notespeedslider : MonoBehaviour
     }
 
 
-    private void OnGUI()
+    public void OnGUI()
     {
         Event keyEvent = Event.current;
 
-        if (keyEvent.isKey)
+        if (keyEvent.isKey && ki != -1)
         {
-            if (keyEvent.keyCode != keys[Key.k0] && keyEvent.keyCode != keys[Key.k1] && keyEvent.keyCode != keys[Key.k2] && keyEvent.keyCode != keys[Key.k3])
+            bool isKeyAlreadyAssigned = keys.ContainsValue(keyEvent.keyCode);
+            if (!isKeyAlreadyAssigned)
+            {
                 keys[(Key)ki] = keyEvent.keyCode;
-            // 만약 이미 있는 키가 지정됐다면 패스
+                txt[ki].text = keys[(Key)ki].ToString();
+            }// 만약 이미 있는 키가 지정됐다면 패스
+            
             ki = -1;
-
         }
 
     }
@@ -59,10 +70,7 @@ public class Notespeedslider : MonoBehaviour
 
     public void Update()
     {
-        for (int i = 0; i < txt.Length; i++)
-        {
-            txt[i].text = keys[(Key)i].ToString();
-        }
+
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
