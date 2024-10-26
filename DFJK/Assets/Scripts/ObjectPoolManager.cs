@@ -16,12 +16,7 @@ public class ObjectPoolManager : MonoBehaviour
             pools[index] = new List<GameObject>();
         }
     }
-<<<<<<< Updated upstream
-    public GameObject Get(int index, int anchovy)
-=======
-    
     public GameObject Get(int anchovy, int panju)//(index, anchovy, panju) = (노트의 색, 라인, 인풋지점)
->>>>>>> Stashed changes
     {
         GameObject select = null;
         index = (int)Math.Floor((double)Math.Abs(anchovy - 1.5)); // 0123에 1001로 대응
@@ -40,11 +35,8 @@ public class ObjectPoolManager : MonoBehaviour
         }
 
         select.GetComponent<Notes>().line = anchovy;
-<<<<<<< Updated upstream
-=======
         select.GetComponent<Notes>().panjung = panju+ (int)(1000*9.125f/GameManager.notespeed);
         Debug.Log("DNote");
->>>>>>> Stashed changes
         return select;
     }
 
