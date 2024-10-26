@@ -1,23 +1,31 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ObjectPoolManager : MonoBehaviour
 {
     public GameObject[] prefabs;
     List<GameObject>[] pools;
+    int index = 0;
 
     void Awake()
     {
         pools = new List<GameObject>[prefabs.Length]; //프리펩 로딩 개수의 크기만큼 pool 크기 설정
 
-        for (int index = 0; index < pools.Length; index++){
+        for (index = 0; index < pools.Length; index++){
             pools[index] = new List<GameObject>();
         }
     }
+<<<<<<< Updated upstream
     public GameObject Get(int index, int anchovy)
+=======
+    
+    public GameObject Get(int anchovy, int panju)//(index, anchovy, panju) = (노트의 색, 라인, 인풋지점)
+>>>>>>> Stashed changes
     {
         GameObject select = null;
-
+        index = (int)Math.Floor((double)Math.Abs(anchovy - 1.5)); // 0123에 1001로 대응
+        
         foreach (GameObject item in pools[index]){
             if (!item.activeSelf){
                 select = item;
@@ -32,6 +40,37 @@ public class ObjectPoolManager : MonoBehaviour
         }
 
         select.GetComponent<Notes>().line = anchovy;
+<<<<<<< Updated upstream
+=======
+        select.GetComponent<Notes>().panjung = panju+ (int)(1000*9.125f/GameManager.notespeed);
+        Debug.Log("DNote");
+>>>>>>> Stashed changes
         return select;
+    }
+
+    public GameObject LongGet(int anchovy, int panju, int endpanju)
+    {
+        GameObject selectbase = null;
+        index = (int)Math.Floor((double)Math.Abs(anchovy - 1.5))+4; // 0123에 3223으로 대응; 롱노트는 +2해서 사용
+        // 롱노트
+        foreach (GameObject item in pools[index]){
+            if (!item.activeSelf){
+                selectbase = item;
+                selectbase.SetActive(true);
+                break;
+            }
+        }
+
+        if (!selectbase){
+            selectbase = Instantiate(prefabs[index], transform);
+            Instantiate(prefabs[index-2], selectbase.transform);
+            pools[index].Add(selectbase);
+        }
+    
+        selectbase.GetComponent<LBaseNotes>().line = anchovy;
+        selectbase.GetComponent<LBaseNotes>().panjung = panju + (int)(1000*9.125f/GameManager.notespeed);
+        selectbase.GetComponent<LBaseNotes>().endpanjung = endpanju + (int)(1000*9.125f/GameManager.notespeed);
+        selectbase.GetComponent<LBaseNotes>().SizeJojul();
+        return selectbase;
     }
 }
