@@ -13,17 +13,16 @@ public class LBaseNotes : MonoBehaviour
     public void SizeJojul()
     {
         Debug.Log($"LONGnote Size changed into {(endpanjung-panjung)*GameManager.notespeed/1000} / spoint = {panjung}");
-        transform.localScale += new Vector3(0, (endpanjung-panjung)*GameManager.notespeed/1000);
+        transform.localScale = new Vector3(1, (endpanjung-panjung)*GameManager.notespeed/250);
         IamJunbiOK = true;
         
     }
 
     void LateUpdate()
     {
-        transform.position = new Vector3(notePosition[line], (-3 + (GameManager.notespeed)*(panjung - NotesCreate.nowms)/1000), 0);
+        transform.position = new Vector3(notePosition[line], (-3.125f + (GameManager.notespeed)*(panjung - NotesCreate.nowms)/1000), 0);
         if (transform.position.y < -5.125 && IamJunbiOK)
         {
-            transform.localScale = new Vector3(0, 1);
             gameObject.SetActive(false);
             IamJunbiOK = false;
         }

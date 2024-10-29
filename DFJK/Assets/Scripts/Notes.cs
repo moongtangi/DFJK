@@ -8,8 +8,6 @@ public class Notes : MonoBehaviour
     public int line;
     public int panjung;
 
-
-
     void LateUpdate()
     {
         transform.position = new Vector3(notePosition[line], (-3 + (GameManager.notespeed)*(panjung - NotesCreate.nowms)/1000), 0);
