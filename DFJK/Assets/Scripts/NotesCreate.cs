@@ -33,6 +33,8 @@ public class NotesCreate : MonoBehaviour
 
     IEnumerator Placer()
     {
+        if (pattern[i] == "")
+            StopCoroutine("Placer");
         string[] parts = pattern[i].Split(',');
         // wit: 노트의 라인 // spoint: 노트의 위치(혹은 롱노트의 시점) // dura(롱노트): 롱노트의 길이 // epoint(롱노트): 롱노트의 종점
 
@@ -56,6 +58,7 @@ public class NotesCreate : MonoBehaviour
         }
         switch (wit)
         {
+<<<<<<< Updated upstream
             case 0:
             case 3:
                 pool.Get(0, wit, spoint);
@@ -63,6 +66,11 @@ public class NotesCreate : MonoBehaviour
             default:
                 pool.Get(1, wit, spoint);
                 break;
+=======
+            i++;
+            if (i < pattern.Count && !string.IsNullOrWhiteSpace(pattern[i]))
+                StartCoroutine(Placer());
+>>>>>>> Stashed changes
         }
 
         i++;
