@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System;
 using Debug = UnityEngine.Debug;
+using UnityEditor;
 
 public class NotesCreate : MonoBehaviour
 {
@@ -23,10 +24,14 @@ public class NotesCreate : MonoBehaviour
     //시간 관련
     public static int nowms = 0;
     public Stopwatch stopwatch = new Stopwatch(); // ms를 구현할 수 있는 정확한 stopwatch 생성
+    public static string FilePath = @"Assets/Patterns/pattern1.txt";
 
-    void Start()
+    void Awake()
     {
-        pattern = new List<string>(Resources.Load<TextAsset>("Patterns/pattern1").text.Split(new[] { "\r\n", "\n" }, System.StringSplitOptions.None)); /* 패턴 파일 읽어옴 */
+        Debug.Log(FilePath);
+        pattern = new List<string>(File.ReadAllLines(FilePath)); /* 패턴 파일 읽어옴 */
+        i = pattern.LastIndexOf("[HitObjects]") + 1;
+        Debug.Log(i);
         StartCoroutine(Placer()); /* IEnumerator Placer() 시작 */
         stopwatch.Start(); // ms 시작
     }
@@ -38,6 +43,8 @@ public class NotesCreate : MonoBehaviour
 
     IEnumerator Placer()
     {
+        if (pattern[i] == "")
+            StopCoroutine("Placer");
         string[] parts = pattern[i].Split(',');
         // wit: 노트의 라인 // spoint: 노트의 위치(혹은 롱노트의 시점) // epoint(롱노트): 롱노트의 종점
 
@@ -60,15 +67,16 @@ public class NotesCreate : MonoBehaviour
         {
             yield return new WaitForFixedUpdate();
         }
-        if (!IamLongNote){
-            pool.Get(wit, spoint);}
-        else{
-            pool.LongGet(wit, spoint, epoint);}
+        if (!IamLongNote) {
+            pool.Get(wit, spoint); }
+        else {
+            pool.LongGet(wit, spoint, epoint); }
 
         if (!End)
         {
             i++;
             StartCoroutine(Placer());
         }
+        
     }
 }

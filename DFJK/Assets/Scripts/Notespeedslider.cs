@@ -75,7 +75,13 @@ public class Notespeedslider : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (menu.activeSelf == true)
+            {
                 menu.SetActive(false);
+                if (GetComponent<gokselect>().selected != null)
+                {
+                    GetComponent<gokselect>().selected.GetComponent<AudioSource>().UnPause();
+                }
+            }
 
             else
             {
@@ -84,6 +90,10 @@ public class Notespeedslider : MonoBehaviour
                 nospenter.text = GameManager.notespeed.ToString("F1");
                 ofse.value = GameManager.offset * 10f;
                 ofseenter.text = GameManager.offset.ToString("F1");
+                if (GetComponent<gokselect>().selected != null)
+                {
+                    GetComponent<gokselect>().selected.GetComponent<AudioSource>().Pause();
+                }
             }
         }
     }

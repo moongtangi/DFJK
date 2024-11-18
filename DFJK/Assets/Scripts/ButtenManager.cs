@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class ButtenManager : MonoBehaviour
@@ -17,6 +18,11 @@ public class ButtenManager : MonoBehaviour
     public void ScoreScene()
     {
         SceneManager.LoadScene("Score Scene");
+    }
+    public string chebo = null;
+    public void finalselectgok()
+    {
+        NotesCreate.FilePath = chebo;
     }
 
 }
