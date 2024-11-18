@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using UnityEngine;
 using UnityEngine.WSA;
@@ -9,13 +10,8 @@ public class Gokdetail : MonoBehaviour
     public string myfolder;
     AudioSource audiosource;
 
-    public string easyFile;
-    public string hardFile;
-    public string intermediateFile;
-    public string normalFile;
-    public string insaneFile;
+    public List<string> DifficultyFile = new List<string>(new string[5]);
     public string imageFile;
-    public bool exist_insane = false;
 
     void Start()
     {
@@ -30,28 +26,22 @@ public class Gokdetail : MonoBehaviour
         {
             string difficulty = difficulty_check(Path.GetFileName(file));
 
-            switch (difficulty)
+            switch (difficulty.ToLower())
             {
-                case "Easy":
                 case "easy":
-                    easyFile = file;
+                    DifficultyFile[0] = file;
                     break;
-                case "Intermediate":
-                case "intermediate":
-                    intermediateFile = file;
-                    break;
-                case "Normal":
                 case "normal":
-                    normalFile = file;
+                    DifficultyFile[1] = file;
                     break;
-                case "Hard":
                 case "hard":
-                    easyFile = file;
+                    DifficultyFile[2] = file;
                     break;
-                case "Insane":
                 case "insane":
-                    easyFile = file;
-                    exist_insane = true;
+                    DifficultyFile[3] = file;
+                    break;
+                case "another":
+                    DifficultyFile[4] = file;
                     break;
             }
         }

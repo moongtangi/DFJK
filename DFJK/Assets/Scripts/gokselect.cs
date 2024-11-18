@@ -15,6 +15,7 @@ public class gokselect : MonoBehaviour
     int i = 0;
 
     public GameObject infoPanelimage;
+    public List<GameObject> Difficultybutton = new List<GameObject>();
 
 
     void Start()
@@ -24,7 +25,7 @@ public class gokselect : MonoBehaviour
 
         foreach (string folder in directories)
         {
-
+            //Debug.Log(folder);
             GameObject newgoklist = Instantiate(blockPrefab, con.transform);
             newgoklist.transform.localPosition = (blockPrefab.transform.localPosition - new Vector3(0, 80 * i, 0));
             newgoklist.transform.localScale = blockPrefab.transform.localScale;
@@ -57,7 +58,22 @@ public class gokselect : MonoBehaviour
         gameObject.GetComponent<AudioSource>().Play();
         gameObject.GetComponent<Image>().color = new Color(1.0f, 1.0f, 0.0f);
         gameObject.GetComponentInChildren<TextMeshProUGUI>().color = new Color(0.0f, 0.0f, 0.0f);
-        infoPanelimage.GetComponent<Image>().sprite = LoadSpriteFromFile(gameObject.GetComponent<Gokdetail>().imageFile);
+        //infoPanelimage.GetComponent<Image>().sprite = LoadSpriteFromFile(gameObject.GetComponent<Gokdetail>().imageFile);
+        for (int i = 0; i<5; i++)
+        {
+            Difficultybutton[i].GetComponent<ButtenManager>().chebo = gameObject.GetComponent<Gokdetail>().DifficultyFile[i];
+            Debug.Log(Difficultybutton[i].GetComponent<ButtenManager>().chebo);
+            if (Difficultybutton[i].GetComponent<ButtenManager>().chebo == "")
+            {
+                Difficultybutton[i].transform.Find("Gradient").GetComponent<Image>().color = new Color(0f, 0f, 0f);
+                Difficultybutton[i].GetComponent<Button>().enabled = false;
+            }
+            else if (Difficultybutton[i].GetComponent<Button>().enabled == false)
+            {
+                Difficultybutton[i].GetComponent<Button>().enabled = true;
+                Difficultybutton[i].transform.Find("Gradient").GetComponent<Image>().color = new Color(1f, 1f, 1f);
+            }
+        }
 
         selected = gameObject;
     }
