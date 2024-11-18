@@ -41,6 +41,7 @@ public class Notespeedslider : MonoBehaviour
     public void Offset()
     {
         GameManager.offset = (ofse.value / 10f);
+
         ofseenter.text = GameManager.offset.ToString("F1"); //슬라이더 변경 값을 변수에 저장
     }
 
@@ -57,7 +58,6 @@ public class Notespeedslider : MonoBehaviour
                 keys[(Key)ki] = keyEvent.keyCode;
                 txt[ki].text = keys[(Key)ki].ToString();
             }// 만약 이미 있는 키가 지정됐다면 패스
-            
             ki = -1;
         }
 
