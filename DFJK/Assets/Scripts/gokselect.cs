@@ -14,6 +14,8 @@ public class gokselect : MonoBehaviour
     public GameObject selected;
     int i = 0;
 
+    public GameObject infoPanelimage;
+
 
     void Start()
     {
@@ -55,8 +57,20 @@ public class gokselect : MonoBehaviour
         gameObject.GetComponent<AudioSource>().Play();
         gameObject.GetComponent<Image>().color = new Color(1.0f, 1.0f, 0.0f);
         gameObject.GetComponentInChildren<TextMeshProUGUI>().color = new Color(0.0f, 0.0f, 0.0f);
+        infoPanelimage.GetComponent<Image>().sprite = LoadSpriteFromFile(gameObject.GetComponent<Gokdetail>().imageFile);
 
         selected = gameObject;
     }
+    Sprite LoadSpriteFromFile(string filePath)
+    {
+        byte[] imageData = File.ReadAllBytes(filePath); // 파일 데이터 읽기
+        Texture2D texture = new Texture2D(2, 2);
 
+        if (texture.LoadImage(imageData)) // Texture2D로 변환
+        {
+            return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+        }
+
+        return null; // 변환 실패 시 null 반환
+    }
 }

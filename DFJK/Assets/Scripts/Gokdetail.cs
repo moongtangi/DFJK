@@ -14,12 +14,15 @@ public class Gokdetail : MonoBehaviour
     public string intermediateFile;
     public string normalFile;
     public string insaneFile;
+    public string imageFile;
     public bool exist_insane = false;
 
     void Start()
     {
+
         audiosource = GetComponent<AudioSource>();
         audiosource.clip = Resources.Load<AudioClip>("Patterns/" + Path.GetFileName(myfolder) + "/audio");
+        imageFile = Path.Combine(myfolder, "image.png");
 
         string[] cheboFiles = Directory.GetFiles(myfolder, "*.osu");
 
