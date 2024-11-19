@@ -65,6 +65,7 @@ public class ObjectPoolManager : MonoBehaviour
         selectbase.GetComponent<Notes>().panjung = panju + (int)(1000*9.125f/GameManager.notespeed);
         selectbase.GetComponent<Notes>().endpanjung = endpanju + (int)(1000*9.125f/GameManager.notespeed);
         selectbase.GetComponent<Notes>().SizeJojul();
+        selectbase.GetComponent<Notes>().태고의달인();
         return selectbase;
     }
 }
