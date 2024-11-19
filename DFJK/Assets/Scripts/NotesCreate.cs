@@ -22,7 +22,7 @@ public class NotesCreate : MonoBehaviour
     public bool IamLongNote = false; // I am 롱노트예요
     
     //시간 관련
-    public static int nowms = 0;
+    public static int nowms = -1;
     public Stopwatch stopwatch = new Stopwatch(); // ms를 구현할 수 있는 정확한 stopwatch 생성
     public static string FilePath = @"Assets/Resources/Patterns/pattern1.txt";
 

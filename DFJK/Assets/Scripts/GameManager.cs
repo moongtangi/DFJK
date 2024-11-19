@@ -21,14 +21,18 @@ public class GameManager : MonoBehaviour
     private Stopwatch stopwatch = new Stopwatch();
     public bool resume;
 
+    public GameObject BGMmanager;
+
     void Awake()
     {
         instance = this;
         resums = -4000; //초반 기본 오프셋같은 느낌
+
+        StartCoroutine(BGMmanager.GetComponent<OnPlayBGMmanager>().PlayMusic());
     }
 
-    private void Update()
-    {
+    void Update()
+    { 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (!pause)
@@ -59,6 +63,7 @@ public class GameManager : MonoBehaviour
         Create.stopwatch.Stop();  //nowms의 증가를 멈추기
         Create.stopwatch.Reset();
         Pausemenu.SetActive(true);
+        BGMmanager.GetComponent<OnPlayBGMmanager>().PauseMusic();
     }
     void DePause() //일시정지 해제
     {
@@ -85,6 +90,7 @@ public class GameManager : MonoBehaviour
                 stopwatch.Stop();
                 stopwatch.Reset();
                 Countdown.gameObject.SetActive(false);
+                StartCoroutine(BGMmanager.GetComponent<OnPlayBGMmanager>().PlayMusic());
             }
         }
     }

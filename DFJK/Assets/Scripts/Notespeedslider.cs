@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using static UnityEngine.Rendering.DebugUI;
 
@@ -13,20 +15,23 @@ public class Notespeedslider : MonoBehaviour
     public InputField ofseenter;
     public UnityEngine.UI.Slider ofse;
 
+    public InputActionAsset inputActions;
+
     public GameObject menu;
-    public enum Key { k0, k1, k2, k3 }; // 키 리스트 define 
+    public enum Key { key0, key1, key2, key3 }; // 키 리스트 define 
     public static Dictionary<Key, KeyCode> keys = new Dictionary<Key, KeyCode>()
     {
-        {Key.k0, KeyCode.D},
-        {Key.k1, KeyCode.F},
-        {Key.k2, KeyCode.J},
-        {Key.k3, KeyCode.K}
+        {Key.key0, KeyCode.D},
+        {Key.key1, KeyCode.F},
+        {Key.key2, KeyCode.J},
+        {Key.key3, KeyCode.K}
     }; // keys라는 dictionary 생성과 동시에 각 키에 기본키 DFJK 삽입
     int ki = -1;
     public Text[] txt;  // 커스텀 키 만들때 뜨는 텍스트 정의
     bool isKeyAlreadyAssigned;
     public void Start()
     {
+
         for (int i = 0; i < txt.Length; i++)
         {
             if (txt[i].text != keys[(Key)i].ToString())
@@ -57,6 +62,7 @@ public class Notespeedslider : MonoBehaviour
             {
                 keys[(Key)ki] = keyEvent.keyCode;
                 txt[ki].text = keys[(Key)ki].ToString();
+                inputActions.FindActionMap("Player").FindAction(Enum.GetNames(typeof(Key))[ki]).ApplyBindingOverride(0, "<Keyboard>/" + keys[(Key)ki].ToString());
             }// 만약 이미 있는 키가 지정됐다면 패스
             ki = -1;
         }
@@ -70,7 +76,6 @@ public class Notespeedslider : MonoBehaviour
 
     public void Update()
     {
-
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -100,7 +105,7 @@ public class Notespeedslider : MonoBehaviour
 
     void Nospinput(string inp)
     {
-        if (float.TryParse(inp, out float input) && ((float.Parse(inp))*10) >= nosp.minValue && ((float.Parse(inp))*10) <= nosp.maxValue)
+        if (float.TryParse(inp, out float input) && ((float.Parse(inp)) * 10) >= nosp.minValue && ((float.Parse(inp)) * 10) <= nosp.maxValue)
         {
             GameManager.notespeed = Mathf.Round(input * 10) / 10f;
 

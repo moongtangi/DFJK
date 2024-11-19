@@ -20,9 +20,11 @@ public class ButtenManager : MonoBehaviour
         SceneManager.LoadScene("Score Scene");
     }
     public string chebo = null;
+    public string BGM = null;
     public void finalselectgok()
     {
         NotesCreate.FilePath = chebo;
+        OnPlayBGMmanager.Iamaudio = BGM;
     }
 
 }
