@@ -13,16 +13,6 @@ public class OnPlayBGMmanager : MonoBehaviour
         audiosource = GetComponent<AudioSource>();
         audiosource.clip = Resources.Load<AudioClip>(Iamaudio);
     }
-
-    //public void PlayMusic(float startline)
-    //{
-    //    if (startline < 0)
-    //        audiosource.time = 0;
-    //    else
-    //     audiosource.time = startline / 1000f;
-    //    StartCoroutine(WaitPositive());
-    //}
-
     public IEnumerator PlayMusic()
     {
         while (NotesCreate.nowms - 1000 * 9.125f / GameManager.notespeed < 0)
@@ -38,5 +28,14 @@ public class OnPlayBGMmanager : MonoBehaviour
         audiosource.Stop();
     }
 
+    public void Update()
+    {
+        if (!audiosource.isPlaying)
+            return;
+        if (Mathf.Abs(audiosource.time - ((NotesCreate.nowms - 1000 * 9.125f / GameManager.notespeed) / 1000f)) > 0.002f)
+        {
+            audiosource.time = (NotesCreate.nowms - 1000 * 9.125f / GameManager.notespeed) / 1000f;
+        }
+    }
 
 }
