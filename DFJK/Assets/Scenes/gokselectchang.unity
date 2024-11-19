@@ -357,6 +357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chebo: 
+  BGM: 
 --- !u!1 &84355775
 GameObject:
   m_ObjectHideFlags: 0
@@ -725,6 +726,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chebo: 
+  BGM: 
 --- !u!1 &164953476
 GameObject:
   m_ObjectHideFlags: 0
@@ -2786,6 +2788,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chebo: 
+  BGM: 
 --- !u!1 &896914652
 GameObject:
   m_ObjectHideFlags: 0
@@ -3053,6 +3056,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chebo: 
+  BGM: 
 --- !u!1 &925453197
 GameObject:
   m_ObjectHideFlags: 0
@@ -3316,6 +3320,7 @@ MonoBehaviour:
   nosp: {fileID: 970397175}
   ofseenter: {fileID: 585237270}
   ofse: {fileID: 1369557874}
+  inputActions: {fileID: 0}
   menu: {fileID: 756287186}
   txt:
   - {fileID: 1859130825}
@@ -3529,9 +3534,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1054887214}
   - component: {fileID: 1054887213}
+  - component: {fileID: 1054887217}
   - component: {fileID: 1054887215}
   - component: {fileID: 1054887216}
-  - component: {fileID: 1054887217}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3661,20 +3666,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b52c0faf35a00c24086f2898b2e7af86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1054887217
-MonoBehaviour:
+--- !u!81 &1054887217
+AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1054887211}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nonRigidbodyVelocity: 0
-  attenuationObject: {fileID: 0}
 --- !u!1 &1061464050
 GameObject:
   m_ObjectHideFlags: 0
@@ -5203,6 +5202,7 @@ MonoBehaviour:
   - 
   - 
   imageFile: 
+  audioFile: 
 --- !u!82 &1747551107
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5763,6 +5763,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chebo: 
+  BGM: 
 --- !u!1 &2015678562
 GameObject:
   m_ObjectHideFlags: 0

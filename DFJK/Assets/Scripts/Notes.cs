@@ -9,6 +9,7 @@ public class Notes : MonoBehaviour
     public int line;
     public int panjung;
     public int endpanjung;
+    public bool longNoteProcessing;
 
     PlayInputManager PIM;
 
@@ -48,7 +49,6 @@ public class Notes : MonoBehaviour
         }
     }
 
-    public bool longNoteProcessing = false;
     void LateUpdate()
     {
         if (!longNoteProcessing)
@@ -63,10 +63,13 @@ public class Notes : MonoBehaviour
         else
         {
             transform.position = new Vector3(notePosition[line], -3, 0);
-            transform.localScale -= new Vector3(1, GameManager.notespeed/1000, 0);
+            transform.localScale = new Vector3(1, (endpanjung-NotesCreate.nowms)*GameManager.notespeed/250);
             if (transform.localScale.y <= 0)
-                gameObject.SetActive(false);
-        }
+            {
+                Debug.Log($"ΛΛISS where {panjung}");
+                NoteOver();
+            }
+        }   
     }
 
     public void NoteOver()
@@ -85,6 +88,7 @@ public class Notes : MonoBehaviour
                 PIM.an3.Remove(this.gameObject);
                 break;
         }
+        longNoteProcessing = false;
         gameObject.SetActive(false);
     }
 }
