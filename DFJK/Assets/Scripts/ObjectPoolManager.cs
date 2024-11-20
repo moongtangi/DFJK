@@ -24,7 +24,7 @@ public class ObjectPoolManager : MonoBehaviour
         index = (int)Math.Floor((double)Math.Abs(anchovy - 1.5)); // 0123에 1001로 대응
         
         foreach (GameObject item in pools[index]){
-            if (!item.activeSelf){
+            if (!item.activeSelf && item.transform.childCount==0){
                 select = item;
                 select.SetActive(true);
                 break;
@@ -38,6 +38,9 @@ public class ObjectPoolManager : MonoBehaviour
 
         select.GetComponent<Notes>().line = anchovy;
         select.GetComponent<Notes>().panjung = panju+ (int)(1000*9.125f/GameManager.notespeed);
+        select.GetComponent<Notes>().endpanjung = 0;
+        select.GetComponent<Notes>().panju = panju;
+        select.GetComponent<Notes>().endpanju = 0;
         select.GetComponent<Notes>().태고의달인();
         return select;
     }
@@ -64,6 +67,8 @@ public class ObjectPoolManager : MonoBehaviour
         selectbase.GetComponent<Notes>().line = anchovy;
         selectbase.GetComponent<Notes>().panjung = panju + (int)(1000*9.125f/GameManager.notespeed);
         selectbase.GetComponent<Notes>().endpanjung = endpanju + (int)(1000*9.125f/GameManager.notespeed);
+        selectbase.GetComponent<Notes>().panju = panju;
+        selectbase.GetComponent<Notes>().endpanju = endpanju;
         selectbase.GetComponent<Notes>().SizeJojul();
         selectbase.GetComponent<Notes>().태고의달인();
         return selectbase;
