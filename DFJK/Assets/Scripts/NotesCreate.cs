@@ -28,6 +28,9 @@ public class NotesCreate : MonoBehaviour
 
     void Awake()
     {
+        wit = 0;
+        spoint = 0;
+        spoint = 0;
         Debug.Log(FilePath);
         pattern = new List<string>(File.ReadAllLines(FilePath)); /* 패턴 파일 읽어옴 */
         i = pattern.LastIndexOf("[HitObjects]") + 1;

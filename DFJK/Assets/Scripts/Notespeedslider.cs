@@ -131,5 +131,10 @@ public class Notespeedslider : MonoBehaviour
         }
     }
 
+    void Volumeinput(string inp)
+    {
+
+    }
+
 }
 

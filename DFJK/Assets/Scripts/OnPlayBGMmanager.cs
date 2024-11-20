@@ -28,14 +28,14 @@ public class OnPlayBGMmanager : MonoBehaviour
         audiosource.Stop();
     }
 
-    public void Update()
-    {
-        if (!audiosource.isPlaying)
-            return;
-        if (Mathf.Abs(audiosource.time - ((NotesCreate.nowms - 1000 * 9.125f / GameManager.notespeed) / 1000f)) > 0.002f)
-        {
-            audiosource.time = (NotesCreate.nowms - 1000 * 9.125f / GameManager.notespeed) / 1000f;
-        }
-    }
+    //public void Update()
+    //{
+    //    if (!audiosource.isPlaying)
+    //        return;
+    //    if (Mathf.Abs(audiosource.time - ((NotesCreate.nowms - 1000 * 9.125f / GameManager.notespeed) / 1000f)) > 0.002f)
+    //    {
+    //        audiosource.time = (NotesCreate.nowms - 1000 * 9.125f / GameManager.notespeed) / 1000f;
+    //    }
+    //}
 
 }
