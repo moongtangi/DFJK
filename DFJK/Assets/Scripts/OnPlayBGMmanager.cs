@@ -15,12 +15,12 @@ public class OnPlayBGMmanager : MonoBehaviour
     }
     public IEnumerator PlayMusic()
     {
-        while (NotesCreate.nowms - 1000 * 9.125f / GameManager.notespeed < 0)
+        while (0.2 + (+NotesCreate.nowms - 1000 * 9.125f / GameManager.notespeed) / 1000f < 0)
         {
             yield return null; // 다음 프레임까지 대기
         }
-        Debug.Log((NotesCreate.nowms - 1000 * 9.125f / GameManager.notespeed) / 1000f);
-        audiosource.time = (NotesCreate.nowms - 1000 * 9.125f / GameManager.notespeed) / 1000f;
+        Debug.Log(0.2 + ( NotesCreate.nowms - 1000 * 9.125f / GameManager.notespeed) / 1000f);
+        audiosource.time = 0.2f + (NotesCreate.nowms - 1000 * 9.125f / GameManager.notespeed) / 1000f;
         audiosource.Play();
     }
     public void PauseMusic()
