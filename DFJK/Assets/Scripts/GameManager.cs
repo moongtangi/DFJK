@@ -67,12 +67,11 @@ public class GameManager : MonoBehaviour
     }
     void DePause() //일시정지 해제
     {
-        pause = false; 
+        pause = false;
         stopwatch.Start();  // 3초 카운트다운 시작
         Pausemenu.SetActive(false);
         resume = true;
         Countdown.gameObject.SetActive(true);
-
     }
     private void LateUpdate()
     {

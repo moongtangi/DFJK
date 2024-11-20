@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
 public class PlayInputManager : MonoBehaviour
 {
@@ -12,136 +11,184 @@ public class PlayInputManager : MonoBehaviour
     public List<GameObject> an2 = new List<GameObject>();
     public List<GameObject> an3 = new List<GameObject>();
 
-    private void OnKey0()
+    public void KnKey0(InputAction.CallbackContext context)
     {
-        foreach (GameObject index in an0)
-        {
-            int nanahira = index.GetComponent<Notes>().panjung-NotesCreate.nowms;
-
-            if (nanahira < 100)
+        if (context.started)
+            foreach (GameObject index in an0)
             {
-                if (-50 < nanahira && nanahira < 50)
-                {
-                    Debug.Log($"PERFΞCT where {index.GetComponent<Notes>().panjung}, line 0");
-                }
-                else if (nanahira > 50 || (-100 < nanahira && nanahira < -50))
-                {
-                    Debug.Log($"GRΣAT where {index.GetComponent<Notes>().panjung}, line 0");
-                }
-                else
-                {
-                    Debug.Log($"B∀D where {index.GetComponent<Notes>().panjung}, line 0");
-                }
+                int nanahira = index.GetComponent<Notes>().panjung-NotesCreate.nowms;
 
-                //단노트 판정 성공: NoteOver 함수 실행
-                if (index.GetComponent<Notes>().endpanjung == 0)
-                    index.GetComponent<Notes>().NoteOver();
-                //롱노트 판정 성공: longNoteProcessing = true로 바꿈->노트가 내려가는 함수 작동 X
-                else{
-                    Debug.Log("롱노트 아르라");
-                    index.GetComponent<Notes>().longNoteProcessing = true;}
-                break;
+                if (nanahira < 100)
+                {
+                    if (-50 < nanahira && nanahira < 50)
+                        Debug.Log($"PERFΞCT where {index.GetComponent<Notes>().panjung}, line 0");
+                    else if (nanahira > 50 || (-100 < nanahira && nanahira < -50))
+                        Debug.Log($"GRΣAT where {index.GetComponent<Notes>().panjung}, line 0");
+                    else
+                        Debug.Log($"B∀D where {index.GetComponent<Notes>().panjung}, line 0");
+
+                    //단노트 판정 성공: NoteOver 함수 실행
+                    if (index.GetComponent<Notes>().endpanjung == 0)
+                        index.GetComponent<Notes>().NoteOver(true);
+                    //롱노트 판정 성공: longNoteProcessing = true로 바꿈->노트가 내려가는 함수 작동 X
+                    else{
+                        Debug.Log("롱노트 아르라");
+                        index.GetComponent<Notes>().longNoteProcessing = true;}
+                    break;
+                }
             }
-        }
-    }
-    
-    private void OnKey1()
-    {
-        foreach (GameObject index in an1)
+
+        if (context.canceled)
         {
-            int nanahira = index.GetComponent<Notes>().panjung-NotesCreate.nowms;
-
-            if (nanahira < 100)
+            foreach (GameObject index in an0)
             {
-                if (-50 < nanahira && nanahira < 50)
+                if (index.GetComponent<Notes>().longNoteProcessing)
                 {
-                    Debug.Log($"PERFΞCT where {index.GetComponent<Notes>().panjung}, line 1");
+                    Debug.Log("롱노트 뗐음");
+                    int sasakure = index.GetComponent<Notes>().endpanjung-NotesCreate.nowms;
+                    
+                    if (sasakure > 150)
+                    {
+                        Debug.Log(sasakure);
+                        index.GetComponent<Notes>().longNoteProcessing = false;
+                    }
                 }
-                else if (nanahira > 50 || (-100 < nanahira && nanahira < -50))
-                {
-                    Debug.Log($"GRΣAT where {index.GetComponent<Notes>().panjung}, line 1");
-                }
-                else
-                {
-                    Debug.Log($"B∀D where {index.GetComponent<Notes>().panjung}, line 1");
-                }
-
-                //단노트 판정 성공: NoteOver 함수 실행
-                if (index.GetComponent<Notes>().endpanjung == 0)
-                    index.GetComponent<Notes>().NoteOver();
-                //롱노트 판정 성공: longNoteProcessing = true로 바꿈->노트가 내려가는 함수 작동 X
-                else{
-                    Debug.Log("롱노트 아르라");
-                    index.GetComponent<Notes>().longNoteProcessing = true;}
-                break;
             }
         }
     }
 
-    private void OnKey2()
+    public void KnKey1(InputAction.CallbackContext context)
     {
-        foreach (GameObject index in an2)
-        {
-            int nanahira = index.GetComponent<Notes>().panjung-NotesCreate.nowms;
-
-            if (nanahira < 100)
+        if (context.started)
+            foreach (GameObject index in an1)
             {
-                if (-50 < nanahira && nanahira < 50)
-                {
-                    Debug.Log($"PERFΞCT where {index.GetComponent<Notes>().panjung}, line 2");
-                }
-                else if (nanahira > 50 || (-100 < nanahira && nanahira < -50))
-                {
-                    Debug.Log($"GRΣAT where {index.GetComponent<Notes>().panjung}, line 2");
-                }
-                else
-                {
-                    Debug.Log($"B∀D where {index.GetComponent<Notes>().panjung}, line 2");
-                }
+                int nanahira = index.GetComponent<Notes>().panjung-NotesCreate.nowms;
 
-                //단노트 판정 성공: NoteOver 함수 실행
-                if (index.GetComponent<Notes>().endpanjung == 0)
-                    index.GetComponent<Notes>().NoteOver();
-                //롱노트 판정 성공: longNoteProcessing = true로 바꿈->노트가 내려가는 함수 작동 X
-                else{
-                    Debug.Log("롱노트 아르라");
-                    index.GetComponent<Notes>().longNoteProcessing = true;}
-                break;
+                if (nanahira < 100)
+                {
+                    if (-50 < nanahira && nanahira < 50)
+                        Debug.Log($"PERFΞCT where {index.GetComponent<Notes>().panjung}, line 1");
+                    else if (nanahira > 50 || (-100 < nanahira && nanahira < -50))
+                        Debug.Log($"GRΣAT where {index.GetComponent<Notes>().panjung}, line 1");
+                    else
+                        Debug.Log($"B∀D where {index.GetComponent<Notes>().panjung}, line 1");
+
+                    //단노트 판정 성공: NoteOver 함수 실행
+                    if (index.GetComponent<Notes>().endpanjung == 0)
+                        index.GetComponent<Notes>().NoteOver(true);
+                    //롱노트 판정 성공: longNoteProcessing = true로 바꿈->노트가 내려가는 함수 작동 X
+                    else{
+                        Debug.Log("롱노트 아르라");
+                        index.GetComponent<Notes>().longNoteProcessing = true;}
+                    break;
+                }
+            }
+
+        if (context.canceled)
+        {
+            foreach (GameObject index in an1)
+            {
+                if (index.GetComponent<Notes>().longNoteProcessing)
+                {
+                    int sasakure = index.GetComponent<Notes>().endpanjung-NotesCreate.nowms;
+                    
+                    if (sasakure > 150)
+                    {
+                        index.GetComponent<Notes>().longNoteProcessing = false;
+                    }
+                }
             }
         }
     }
 
-    private void OnKey3()
+    public void KnKey2(InputAction.CallbackContext context)
     {
-        foreach (GameObject index in an3)
-        {
-            int nanahira = index.GetComponent<Notes>().panjung-NotesCreate.nowms;
-
-            if (nanahira < 100)
+        if (context.started)
+            foreach (GameObject index in an2)
             {
-                if (-50 < nanahira && nanahira < 50)
-                {
-                    Debug.Log($"PERFΞCT where {index.GetComponent<Notes>().panjung}, line 3");
-                }
-                else if (nanahira > 50 || (-100 < nanahira && nanahira < -50))
-                {
-                    Debug.Log($"GRΣAT where {index.GetComponent<Notes>().panjung}, line 3");
-                }
-                else
-                {
-                    Debug.Log($"B∀D where {index.GetComponent<Notes>().panjung}, line 3");
-                }
+                int nanahira = index.GetComponent<Notes>().panjung-NotesCreate.nowms;
 
-                //단노트 판정 성공: NoteOver 함수 실행
-                if (index.GetComponent<Notes>().endpanjung == 0)
-                    index.GetComponent<Notes>().NoteOver();
-                //롱노트 판정 성공: longNoteProcessing = true로 바꿈->노트가 내려가는 함수 작동 X
-                else{
-                    Debug.Log("롱노트 아르라");
-                    index.GetComponent<Notes>().longNoteProcessing = true;}
-                break;
+                if (nanahira < 100)
+                {
+                    if (-50 < nanahira && nanahira < 50)
+                        Debug.Log($"PERFΞCT where {index.GetComponent<Notes>().panjung}, line 2");
+                    else if (nanahira > 50 || (-100 < nanahira && nanahira < -50))
+                        Debug.Log($"GRΣAT where {index.GetComponent<Notes>().panjung}, line 2");
+                    else
+                        Debug.Log($"B∀D where {index.GetComponent<Notes>().panjung}, line2");
+
+                    //단노트 판정 성공: NoteOver 함수 실행
+                    if (index.GetComponent<Notes>().endpanjung == 0)
+                        index.GetComponent<Notes>().NoteOver(true);
+                    //롱노트 판정 성공: longNoteProcessing = true로 바꿈->노트가 내려가는 함수 작동 X
+                    else{
+                        Debug.Log("롱노트 아르라");
+                        index.GetComponent<Notes>().longNoteProcessing = true;}
+                    break;
+                }
+            }
+
+        if (context.canceled)
+        {
+            foreach (GameObject index in an2)
+            {
+                if (index.GetComponent<Notes>().longNoteProcessing)
+                {
+                    int sasakure = index.GetComponent<Notes>().endpanjung-NotesCreate.nowms;
+                    
+                    if (sasakure > 150)
+                    {
+                        index.GetComponent<Notes>().longNoteProcessing = false;
+                    }
+                }
             }
         }
     }
-    
+
+    public void KnKey3(InputAction.CallbackContext context)
+    {
+        if (context.started)
+            foreach (GameObject index in an3)
+            {
+                int nanahira = index.GetComponent<Notes>().panjung-NotesCreate.nowms;
+
+                if (nanahira < 100)
+                {
+                    if (-50 < nanahira && nanahira < 50)
+                        Debug.Log($"PERFΞCT where {index.GetComponent<Notes>().panjung}, line3");
+                    else if (nanahira > 50 || (-100 < nanahira && nanahira < -50))
+                        Debug.Log($"GRΣAT where {index.GetComponent<Notes>().panjung}, line 3");
+                    else
+                        Debug.Log($"B∀D where {index.GetComponent<Notes>().panjung}, line 3");
+
+                    //단노트 판정 성공: NoteOver 함수 실행
+                    if (index.GetComponent<Notes>().endpanjung == 0)
+                        index.GetComponent<Notes>().NoteOver(true);
+                    //롱노트 판정 성공: longNoteProcessing = true로 바꿈->노트가 내려가는 함수 작동 X
+                    else{
+                        Debug.Log("롱노트 아르라");
+                        index.GetComponent<Notes>().longNoteProcessing = true;}
+                    break;
+                }
+            }
+
+        if (context.canceled)
+        {
+            foreach (GameObject index in an3)
+            {
+                if (index.GetComponent<Notes>().longNoteProcessing)
+                {
+                    int sasakure = index.GetComponent<Notes>().endpanjung-NotesCreate.nowms;
+                    
+                    if (sasakure > 150)
+                    {
+
+                        index.GetComponent<Notes>().longNoteProcessing = false;
+                    }
+                }
+            }
+        }
+    }
+
+
 }
