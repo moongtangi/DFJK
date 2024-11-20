@@ -7,12 +7,12 @@
             "actions": [
                 {
                     "name": "key0",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "c193ecfa-75a7-4075-8361-8cefaddcbdad",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
+                    "interactions": "Hold(pressPoint=1.401298E-45)",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "key1",
@@ -20,7 +20,7 @@
                     "id": "c13d7a29-f7e2-4294-80ff-3edab180d23a",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Hold",
                     "initialStateCheck": false
                 },
                 {
@@ -29,7 +29,7 @@
                     "id": "319d631e-6aa4-4eab-8b80-66d10a9dbdff",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Hold",
                     "initialStateCheck": false
                 },
                 {
@@ -38,7 +38,7 @@
                     "id": "f3c814fe-0a12-48ed-80a1-210ec65b46f2",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Hold",
                     "initialStateCheck": false
                 }
             ],

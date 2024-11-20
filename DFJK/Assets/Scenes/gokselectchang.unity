@@ -3320,7 +3320,7 @@ MonoBehaviour:
   nosp: {fileID: 970397175}
   ofseenter: {fileID: 585237270}
   ofse: {fileID: 1369557874}
-  inputActions: {fileID: 0}
+  inputActions: {fileID: -944628639613478452, guid: 280a940087c62c747982fdd98ebe868b, type: 3}
   menu: {fileID: 756287186}
   txt:
   - {fileID: 1859130825}
