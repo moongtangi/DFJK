@@ -11,12 +11,16 @@ public class Notes : MonoBehaviour
     public int endpanjung;
     public bool longNoteProcessing;
 
+    public int panju;
+    public int endpanju;
+
     public bool owari = false;
 
     PlayInputManager PIM;
 
     void Awake()
     {
+        longNoteProcessing = false;
         owari = false;
         GetComponent<Renderer>().enabled = true;
         endpanjung = 0;
@@ -58,12 +62,13 @@ public class Notes : MonoBehaviour
                 if (!owari)
                     Debug.Log($"ΛΛISS where {panjung}, line {line}");
                 owari = true;
+
                 if (endpanjung == 0)
                     NoteOver(true);
                 else
                 {
                     transform.position = new Vector3(notePosition[line], -5, 0);
-                    transform.localScale = new Vector3(1, (endpanjung-NotesCreate.nowms)*GameManager.notespeed/250+2);
+                    transform.localScale = new Vector3(1, (endpanjung-NotesCreate.nowms)*GameManager.notespeed/250);
                     if (transform.localScale.y <= 0)
                     {
                         NoteOver(true);
@@ -100,11 +105,6 @@ public class Notes : MonoBehaviour
                 PIM.an3.Remove(this.gameObject);
                 break;
         }
-        if (kameila)
-            NOPlus();
-    }
-    void NOPlus()
-    {
         longNoteProcessing = false;
         gameObject.SetActive(false);
         owari = false;
