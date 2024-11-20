@@ -58,7 +58,7 @@ public class gokselect : MonoBehaviour
         gameObject.GetComponent<AudioSource>().Play();
         gameObject.GetComponent<Image>().color = new Color(1.0f, 1.0f, 0.0f);
         gameObject.GetComponentInChildren<TextMeshProUGUI>().color = new Color(0.0f, 0.0f, 0.0f);
-        //infoPanelimage.GetComponent<Image>().sprite = LoadSpriteFromFile(gameObject.GetComponent<Gokdetail>().imageFile);
+        infoPanelimage.GetComponent<Image>().sprite = LoadSpriteFromFile(gameObject.GetComponent<Gokdetail>().imageFile);
         for (int i = 0; i<5; i++)
         {
             Difficultybutton[i].GetComponent<ButtenManager>().BGM = gameObject.GetComponent<Gokdetail>().audioFile;
