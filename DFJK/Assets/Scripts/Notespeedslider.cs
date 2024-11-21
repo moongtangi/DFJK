@@ -42,6 +42,9 @@ public class Notespeedslider : MonoBehaviour
         nospenter.onEndEdit.AddListener(Nospinput);
         ofseenter.onEndEdit.AddListener(Ofseinput);
         volenter.onEndEdit.AddListener(Volumeinput);
+
+        vosp.value = GameManager.volume;
+        volenter.text = GameManager.volume.ToString("F1") + "%";
     }
     public void NoteSpeed()
     {
