@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;    
+using TMPro;
+using System.Reflection;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,6 +24,9 @@ public class GameManager : MonoBehaviour
 
     public static float volume = 100;
 
+    public GameObject BackGround;
+    public static Sprite ImageFile;
+
     public GameObject BGMmanager;
 
     void Awake()
@@ -30,6 +34,8 @@ public class GameManager : MonoBehaviour
         instance = this;
 
         StartCoroutine(BGMmanager.GetComponent<OnPlayBGMmanager>().PlayMusic());
+        if (ImageFile != null)
+        BackGround.GetComponent<Image>().sprite = ImageFile;
     }
 
     void Update()

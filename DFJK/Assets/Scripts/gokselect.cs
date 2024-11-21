@@ -63,6 +63,7 @@ public class gokselect : MonoBehaviour
         infoPanelimage.GetComponent<Image>().sprite = LoadSpriteFromFile(gameObject.GetComponent<Gokdetail>().imageFile);
         for (int i = 0; i<5; i++)
         {
+            Difficultybutton[i].GetComponent<ButtenManager>().Image = LoadSpriteFromFile(gameObject.GetComponent<Gokdetail>().backGFile);
             Difficultybutton[i].GetComponent<ButtenManager>().BGM = gameObject.GetComponent<Gokdetail>().audioFile;
             Difficultybutton[i].GetComponent<ButtenManager>().chebo = gameObject.GetComponent<Gokdetail>().DifficultyFile[i];
             Debug.Log(Difficultybutton[i].GetComponent<ButtenManager>().chebo);

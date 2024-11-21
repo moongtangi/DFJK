@@ -21,13 +21,13 @@ public class Notespeedslider : MonoBehaviour
     public InputActionAsset inputActions;
 
     public GameObject menu;
-    public enum Key { key0, key1, key2, key3 }; // 키 리스트 define 
+    public enum Key { Knkey0, Knkey1, Knkey2, Knkey3 }; // 키 리스트 define 
     public static Dictionary<Key, KeyCode> keys = new Dictionary<Key, KeyCode>()
     {
-        {Key.key0, KeyCode.D},
-        {Key.key1, KeyCode.F},
-        {Key.key2, KeyCode.J},
-        {Key.key3, KeyCode.K}
+        {Key.Knkey0, KeyCode.D},
+        {Key.Knkey1, KeyCode.F},
+        {Key.Knkey2, KeyCode.J},
+        {Key.Knkey3, KeyCode.K}
     }; // keys라는 dictionary 생성과 동시에 각 키에 기본키 DFJK 삽입
     int ki = -1;
     public Text[] txt;  // 커스텀 키 만들때 뜨는 텍스트 정의

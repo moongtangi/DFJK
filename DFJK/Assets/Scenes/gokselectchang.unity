@@ -358,6 +358,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chebo: 
   BGM: 
+  Image: {fileID: 0}
 --- !u!1 &84355775
 GameObject:
   m_ObjectHideFlags: 0
@@ -727,6 +728,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chebo: 
   BGM: 
+  Image: {fileID: 0}
 --- !u!1 &164953476
 GameObject:
   m_ObjectHideFlags: 0
@@ -3122,6 +3124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chebo: 
   BGM: 
+  Image: {fileID: 0}
 --- !u!1 &886846888
 GameObject:
   m_ObjectHideFlags: 0
@@ -3465,6 +3468,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chebo: 
   BGM: 
+  Image: {fileID: 0}
 --- !u!1 &921094334
 GameObject:
   m_ObjectHideFlags: 0
@@ -6221,6 +6225,7 @@ MonoBehaviour:
   - 
   imageFile: 
   audioFile: 
+  backGFile: 
 --- !u!82 &1747551107
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6916,6 +6921,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chebo: 
   BGM: 
+  Image: {fileID: 0}
 --- !u!1 &2015678562
 GameObject:
   m_ObjectHideFlags: 0
