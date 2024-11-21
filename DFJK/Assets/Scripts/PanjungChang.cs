@@ -30,12 +30,6 @@ public class PanjungChang : MonoBehaviour
         combo = 0;
         noteNum = 0;
         rankImage.enabled = false;
-
-        animatorSun0 = sun0.GetComponent<Animator>();
-        animatorSun1 = sun1.GetComponent<Animator>();
-        animatorSun2 = sun2.GetComponent<Animator>();
-        animatorSun3 = sun3.GetComponent<Animator>();
-        HideAllEffects();
     }
 
     public void Perfect(GameObject wyvernp)
@@ -44,16 +38,6 @@ public class PanjungChang : MonoBehaviour
         perNum++;combo++;noteNum++;
         GoodAccuracy();
         ShowRank(PerfectSprite);
-        switch (wyvernp.GetComponent<Notes>().line){
-            case 0:
-                PlayEffect(animatorSun0);break;
-            case 1:
-                PlayEffect(animatorSun1);break;
-            case 2:
-                PlayEffect(animatorSun2);break;
-            case 3:
-                PlayEffect(animatorSun3);break;}
-        StartCoroutine(DisableAfterAnimation(wyvernp.GetComponent<Notes>().line));
     }
     public void Great(GameObject wyvernp)
     {
@@ -61,16 +45,6 @@ public class PanjungChang : MonoBehaviour
         greNum++;combo++;noteNum++;
         GoodAccuracy();
         ShowRank(GreatSprite);
-        switch (wyvernp.GetComponent<Notes>().line){
-            case 0:
-                PlayEffect(animatorSun0);break;
-            case 1:
-                PlayEffect(animatorSun1);break;
-            case 2:
-                PlayEffect(animatorSun2);break;
-            case 3:
-                PlayEffect(animatorSun3);break;}
-        StartCoroutine(DisableAfterAnimation(wyvernp.GetComponent<Notes>().line));
     }
     public void Bad(GameObject wyvernp)
     {
@@ -78,16 +52,6 @@ public class PanjungChang : MonoBehaviour
         badNum++;combo++;noteNum++;
         GoodAccuracy();
         ShowRank(BadSprite);
-        switch (wyvernp.GetComponent<Notes>().line){
-            case 0:
-                PlayEffect(animatorSun0);break;
-            case 1:
-                PlayEffect(animatorSun1);break;
-            case 2:
-                PlayEffect(animatorSun2);break;
-            case 3:
-                PlayEffect(animatorSun3);break;}
-        StartCoroutine(DisableAfterAnimation(wyvernp.GetComponent<Notes>().line));
     }
     public void Miss(GameObject wyvernp)
     {
@@ -119,50 +83,7 @@ public class PanjungChang : MonoBehaviour
         ComboChange(combo);
         Debug.Log($"저ㅏㅇ확{accuracy} 콤보{combo}");
     }
-//>>>>>>>>>>>>>>>>>>>>>>>>>>
-    public GameObject sun0;
-    public GameObject sun1;
-    public GameObject sun2;
-    public GameObject sun3;
-    private Animator animatorSun0;
-    private Animator animatorSun1;
-    private Animator animatorSun2;
-    private Animator animatorSun3;
 
-    private void HideAllEffects()
-    {
-        animatorSun0.gameObject.SetActive(false);
-        animatorSun1.gameObject.SetActive(false);
-        animatorSun2.gameObject.SetActive(false);
-        animatorSun3.gameObject.SetActive(false);
-    }
-
-    private void PlayEffect(Animator animator)
-    {
-        animator.gameObject.SetActive(true);
-        animator.SetTrigger("yoshitaka");
-    }
-
-    private System.Collections.IEnumerator DisableAfterAnimation(int line)
-    {
-        yield return new WaitForSeconds(1f); // 애니메이션의 길이로 조정
-        switch (line)
-        {
-            case 0:
-                animatorSun0.gameObject.SetActive(false);
-                break;
-            case 1:
-                animatorSun1.gameObject.SetActive(false);
-                break;
-            case 2:
-                animatorSun2.gameObject.SetActive(false);
-                break;
-            case 3:
-                animatorSun3.gameObject.SetActive(false);
-                break;
-        }
-    }
-//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     public Sprite[] digitSprites; // 0~9 스프라이트 배열
     public GameObject digitPrefab; // 숫자 표시용 프리팹
     public RectTransform container; // 숫자들을 배치할 부모 컨테이너
