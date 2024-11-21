@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public NotesCreate Create;
     public static GameManager instance;
     public GameObject Pausemenu;
-    public Text Countdown;
+    public TMP_Text Countdown;
 
     public static float notespeed = 11.4f;
     public static float offset = 0f;
