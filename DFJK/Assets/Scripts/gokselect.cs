@@ -23,23 +23,27 @@ public class gokselect : MonoBehaviour
     void Start()
     {
 
-        string[] directories = Directory.GetDirectories(Application.dataPath + "/Resources/Patterns");
+        TextAsset folderList = Resources.Load<TextAsset>("Patterns/folder_list");
+
+        string[] directories = folderList.text.Split('\n');
 
         foreach (string folder in directories)
         {
-            //Debug.Log(folder);
+            string folderName = folder.Trim();
+            if (string.IsNullOrEmpty(folderName)) continue;
+
             GameObject newgoklist = Instantiate(blockPrefab, con.transform);
             newgoklist.transform.localPosition = (blockPrefab.transform.localPosition - new Vector3(0, 80 * i, 0));
             newgoklist.transform.localScale = blockPrefab.transform.localScale;
-            newgoklist.name = Path.GetFileName(folder);
+            newgoklist.name = Path.GetFileName(folderName);
             i++;
 
 
             TextMeshProUGUI buttonText = newgoklist.GetComponentInChildren<TextMeshProUGUI>();
-            buttonText.text = Path.GetFileName(folder);
+            buttonText.text = folderName;
 
-            newgoklist.GetComponent<Gokdetail>().myfolder = folder;
-
+            newgoklist.GetComponent<Gokdetail>().myfolder = "Patterns/" + folderName;
+            
         }
         
         blockPrefab.SetActive(false);
@@ -66,7 +70,7 @@ public class gokselect : MonoBehaviour
             Difficultybutton[i].GetComponent<ButtenManager>().Image = LoadSpriteFromFile(gameObject.GetComponent<Gokdetail>().backGFile);
             Difficultybutton[i].GetComponent<ButtenManager>().BGM = gameObject.GetComponent<Gokdetail>().audioFile;
             Difficultybutton[i].GetComponent<ButtenManager>().chebo = gameObject.GetComponent<Gokdetail>().DifficultyFile[i];
-            Debug.Log(Difficultybutton[i].GetComponent<ButtenManager>().chebo);
+            Debug.Log(gameObject.GetComponent<Gokdetail>().DifficultyFile[i]);
             if (Difficultybutton[i].GetComponent<ButtenManager>().chebo == "")
             {
                 Difficultybutton[i].transform.Find("Gradient").GetComponent<Image>().color = new Color(0f, 0f, 0f);
@@ -93,14 +97,8 @@ public class gokselect : MonoBehaviour
 
     Sprite LoadSpriteFromFile(string filePath)
     {
-        byte[] imageData = File.ReadAllBytes(filePath); // 파일 데이터 읽기
-        Texture2D texture = new Texture2D(2, 2);
+        Sprite sprite = Resources.Load<Sprite>(filePath);
 
-        if (texture.LoadImage(imageData)) // Texture2D로 변환
-        {
-            return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-        }
-
-        return null; // 변환 실패 시 null 반환
+        return sprite;
     }
 }

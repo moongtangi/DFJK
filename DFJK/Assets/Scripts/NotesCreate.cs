@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System;
 using Debug = UnityEngine.Debug;
 using UnityEditor;
+using UnityEngine.TextCore.Text;
 
 public class NotesCreate : MonoBehaviour
 {
@@ -44,7 +45,7 @@ public class NotesCreate : MonoBehaviour
         spoint = 0;
         spoint = 0;
         Debug.Log(FilePath);
-        pattern = new List<string>(File.ReadAllLines(FilePath)); /* 패턴 파일 읽어옴 */
+        pattern = new List<string>(Resources.Load<UnityEngine.TextAsset>(FilePath).text.Split(new[] { "\r\n", "\n" }, System.StringSplitOptions.None)); /* 패턴 파일 읽어옴 */
         i = pattern.LastIndexOf("[HitObjects]") + 1;
         Debug.Log(i);
         StartCoroutine(Placer()); /* IEnumerator Placer() 시작 */

@@ -17,35 +17,42 @@ public class Gokdetail : MonoBehaviour
 
     void Start()
     {
-        audioFile = "Patterns/" + Path.GetFileName(myfolder) + "/audio";
+        audioFile = $"{myfolder}/audio";
         audiosource = GetComponent<AudioSource>();
         audiosource.clip = Resources.Load<AudioClip>(audioFile);
-        imageFile = Path.Combine(myfolder, "image.png");
-        backGFile = Path.Combine(myfolder, "BEGEH.jpg");
+        imageFile = $"{myfolder}/image";
+        backGFile = $"{myfolder}/BEGEH";
 
-        string[] cheboFiles = Directory.GetFiles(myfolder, "*.osu");
-
-        foreach (string file in cheboFiles)
+        string resourcePath = Path.Combine(UnityEngine.Application.dataPath, "Resources", myfolder);
+        if (Directory.Exists(resourcePath))
         {
-            string difficulty = difficulty_check(Path.GetFileName(file));
+            string[] cheboFiles = Directory.GetFiles(resourcePath, "*.osu");
 
-            switch (difficulty.ToLower())
+            foreach (string file in cheboFiles)
             {
-                case "easy":
-                    DifficultyFile[0] = file;
-                    break;
-                case "normal":
-                    DifficultyFile[1] = file;
-                    break;
-                case "hard":
-                    DifficultyFile[2] = file;
-                    break;
-                case "insane":
-                    DifficultyFile[3] = file;
-                    break;
-                case "another":
-                    DifficultyFile[4] = file;
-                    break;
+                string fileName = Path.GetFileNameWithoutExtension(file);
+
+                string difficulty = difficulty_check(fileName);
+
+                switch (difficulty.ToLower())
+                {
+                    case "easy":
+                        DifficultyFile[0] = $"{myfolder}/{fileName}";
+                        break;
+                    case "normal":
+                        DifficultyFile[1] = $"{myfolder}/{fileName}";
+                        break;
+                    case "hard":
+                        DifficultyFile[2] = $"{myfolder}/{fileName}";
+                        break;
+                    case "insane":
+                        DifficultyFile[3] = $"{myfolder}/{fileName}";
+                        break;
+                    case "another":
+                        DifficultyFile[4] = $"{myfolder}/{fileName}";
+                        break;
+                    
+                }
             }
         }
         
