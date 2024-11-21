@@ -5,38 +5,47 @@ using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using TMPro;
 using static UnityEngine.Rendering.DebugUI;
 
 public class Notespeedslider : MonoBehaviour
 {
 
-    public InputField nospenter;
+    public TMP_InputField nospenter;
     public UnityEngine.UI.Slider nosp;
-    public InputField ofseenter;
+    public TMP_InputField ofseenter;
     public UnityEngine.UI.Slider ofse;
+
+    public TMP_InputField volenter;
+    public UnityEngine.UI.Slider vosp;
 
     public InputActionAsset inputActions;
 
     public GameObject menu;
-    public enum Key { key0, key1, key2, key3 }; // 키 리스트 define 
+    public enum Key { Knkey0, Knkey1, Knkey2, Knkey3 }; // 키 리스트 define 
     public static Dictionary<Key, KeyCode> keys = new Dictionary<Key, KeyCode>()
     {
-        {Key.key0, KeyCode.D},
-        {Key.key1, KeyCode.F},
-        {Key.key2, KeyCode.J},
-        {Key.key3, KeyCode.K}
+        {Key.Knkey0, KeyCode.D},
+        {Key.Knkey1, KeyCode.F},
+        {Key.Knkey2, KeyCode.J},
+        {Key.Knkey3, KeyCode.K}
     }; // keys라는 dictionary 생성과 동시에 각 키에 기본키 DFJK 삽입
     int ki = -1;
-    public Text[] txt;  // 커스텀 키 만들때 뜨는 텍스트 정의
+    public TMP_Text[] txt;  // 커스텀 키 만들때 뜨는 텍스트 정의
     bool isKeyAlreadyAssigned;
     public void Start()
     {
-
         for (int i = 0; i < txt.Length; i++)
         {
             if (txt[i].text != keys[(Key)i].ToString())
                 txt[i].text = keys[(Key)i].ToString();
         }
+        nospenter.onEndEdit.AddListener(Nospinput);
+        ofseenter.onEndEdit.AddListener(Ofseinput);
+        volenter.onEndEdit.AddListener(Volumeinput);
+
+        vosp.value = GameManager.volume;
+        volenter.text = GameManager.volume.ToString("F1") + "%";
     }
     public void NoteSpeed()
     {
@@ -48,6 +57,11 @@ public class Notespeedslider : MonoBehaviour
         GameManager.offset = (ofse.value / 10f);
 
         ofseenter.text = GameManager.offset.ToString("F1"); //슬라이더 변경 값을 변수에 저장
+    }
+    public void Volume()
+    {
+        GameManager.volume = vosp.value;
+        volenter.text = GameManager.volume.ToString("F1") + "%";
     }
 
 
@@ -103,7 +117,7 @@ public class Notespeedslider : MonoBehaviour
         }
     }
 
-    void Nospinput(string inp)
+    public void Nospinput(string inp)
     {
         if (float.TryParse(inp, out float input) && ((float.Parse(inp)) * 10) >= nosp.minValue && ((float.Parse(inp)) * 10) <= nosp.maxValue)
         {
@@ -117,7 +131,7 @@ public class Notespeedslider : MonoBehaviour
         }
     }
 
-    void Ofseinput(string inp)
+    public void Ofseinput(string inp)
     {
         if (float.TryParse(inp, out float input) && ((float.Parse(inp)) * 10) >= ofse.minValue && ((float.Parse(inp)) * 10) <= ofse.maxValue)
         {
@@ -128,6 +142,20 @@ public class Notespeedslider : MonoBehaviour
         else
         {
             ofseenter.text = GameManager.offset.ToString("F1");
+        }
+    }
+
+    public void Volumeinput(string inp)
+    {
+        if (float.TryParse(inp, out float input) && ((float.Parse(inp))) >= ofse.minValue && ((float.Parse(inp))) <= ofse.maxValue)
+        {
+            GameManager.volume = input;
+
+            vosp.value = input;
+        }
+        else
+        {
+            volenter.text = GameManager.volume.ToString("F1") + "%";
         }
     }
 
