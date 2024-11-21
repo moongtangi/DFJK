@@ -14,7 +14,7 @@ public class PlayInputManager : MonoBehaviour
 
     void Awake()
     {
-        GameObject pan = GameObject.Find("Panjung");
+        GameObject pan = GameObject.Find("ShinChangSup");
         PC = pan.GetComponent<PanjungChang>();
     }
 

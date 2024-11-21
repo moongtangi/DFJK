@@ -25,7 +25,7 @@ public class Notes : MonoBehaviour
         owari = false;
         GetComponent<Renderer>().enabled = true;
         endpanjung = 0;
-        GameObject pan = GameObject.Find("Panjung");
+        GameObject pan = GameObject.Find("ShinChangSup");
         GameObject mang = GameObject.Find("El_Fail");
         PIM = mang.GetComponent<PlayInputManager>();
         PC = pan.GetComponent<PanjungChang>();
