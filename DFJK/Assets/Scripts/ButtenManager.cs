@@ -21,10 +21,12 @@ public class ButtenManager : MonoBehaviour
     }
     public string chebo = null;
     public string BGM = null;
+    public Sprite Image = null;
     public void finalselectgok()
     {
         NotesCreate.FilePath = chebo;
         OnPlayBGMmanager.Iamaudio = BGM;
+        GameManager.ImageFile = Image;
     }
 
 }

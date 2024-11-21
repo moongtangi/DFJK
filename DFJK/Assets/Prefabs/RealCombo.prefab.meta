@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:DFJK/Assets/Prefabs/RealCombo.prefab.meta
 guid: 165839a0a505a724e9de42867725a6bb
 PrefabImporter:
+========
+guid: 2928d7bb88fee294c8b5e1842cf6c68b
+NativeFormatImporter:
+>>>>>>>> origin/머지해버렸어요:DFJK/Assets/animation/notecontroller.controller.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

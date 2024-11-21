@@ -4,7 +4,9 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.UI;
 using TMPro;
+using System;
 using System.Xml.Linq;
+using UnityEditor.ShaderKeywordFilter;
 
 public class gokselect : MonoBehaviour
 {
@@ -61,6 +63,7 @@ public class gokselect : MonoBehaviour
         infoPanelimage.GetComponent<Image>().sprite = LoadSpriteFromFile(gameObject.GetComponent<Gokdetail>().imageFile);
         for (int i = 0; i<5; i++)
         {
+            Difficultybutton[i].GetComponent<ButtenManager>().Image = LoadSpriteFromFile(gameObject.GetComponent<Gokdetail>().backGFile);
             Difficultybutton[i].GetComponent<ButtenManager>().BGM = gameObject.GetComponent<Gokdetail>().audioFile;
             Difficultybutton[i].GetComponent<ButtenManager>().chebo = gameObject.GetComponent<Gokdetail>().DifficultyFile[i];
             Debug.Log(Difficultybutton[i].GetComponent<ButtenManager>().chebo);
@@ -78,6 +81,16 @@ public class gokselect : MonoBehaviour
 
         selected = gameObject;
     }
+
+    private void Update()
+    {
+        if (selected != null && (float)Math.Round(GameManager.volume /100f, 5) != (float)Math.Round(selected.GetComponent<AudioSource>().volume, 5) )
+        {
+            Debug.Log($"변수/100 : {GameManager.volume/100f}, 실제값 : {selected.GetComponent<AudioSource>().volume}");
+            selected.GetComponent<AudioSource>().volume = GameManager.volume / 100f;
+        }
+    }
+
     Sprite LoadSpriteFromFile(string filePath)
     {
         byte[] imageData = File.ReadAllBytes(filePath); // 파일 데이터 읽기
