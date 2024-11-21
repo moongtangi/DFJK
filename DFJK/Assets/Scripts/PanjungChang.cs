@@ -10,11 +10,11 @@ public class PanjungChang : MonoBehaviour
     public Sprite GreatSprite; // Great
     public Sprite BadSprite; // Bad
     public Sprite MissSprite; // Miss
-    public double accuracy = 0;
-    public int perNum = 0;
-    public int greNum = 0;
-    public int badNum = 0;
-    public int misNum = 0;
+    public static double accuracy = 0;
+    public static int perNum = 0;
+    public static int greNum = 0;
+    public static int badNum = 0;
+    public static int misNum = 0;
     public int combo = 0;
     public int noteNum = 0;
 
