@@ -15,6 +15,9 @@ public class Notespeedslider : MonoBehaviour
     public InputField ofseenter;
     public UnityEngine.UI.Slider ofse;
 
+    public InputField volenter;
+    public UnityEngine.UI.Slider vosp;
+
     public InputActionAsset inputActions;
 
     public GameObject menu;
@@ -31,12 +34,14 @@ public class Notespeedslider : MonoBehaviour
     bool isKeyAlreadyAssigned;
     public void Start()
     {
-
         for (int i = 0; i < txt.Length; i++)
         {
             if (txt[i].text != keys[(Key)i].ToString())
                 txt[i].text = keys[(Key)i].ToString();
         }
+        nospenter.onEndEdit.AddListener(Nospinput);
+        ofseenter.onEndEdit.AddListener(Ofseinput);
+        volenter.onEndEdit.AddListener(Volumeinput);
     }
     public void NoteSpeed()
     {
@@ -48,6 +53,11 @@ public class Notespeedslider : MonoBehaviour
         GameManager.offset = (ofse.value / 10f);
 
         ofseenter.text = GameManager.offset.ToString("F1"); //슬라이더 변경 값을 변수에 저장
+    }
+    public void Volume()
+    {
+        GameManager.volume = vosp.value;
+        volenter.text = GameManager.volume.ToString("F1") + "%";
     }
 
 
@@ -103,7 +113,7 @@ public class Notespeedslider : MonoBehaviour
         }
     }
 
-    void Nospinput(string inp)
+    public void Nospinput(string inp)
     {
         if (float.TryParse(inp, out float input) && ((float.Parse(inp)) * 10) >= nosp.minValue && ((float.Parse(inp)) * 10) <= nosp.maxValue)
         {
@@ -117,7 +127,7 @@ public class Notespeedslider : MonoBehaviour
         }
     }
 
-    void Ofseinput(string inp)
+    public void Ofseinput(string inp)
     {
         if (float.TryParse(inp, out float input) && ((float.Parse(inp)) * 10) >= ofse.minValue && ((float.Parse(inp)) * 10) <= ofse.maxValue)
         {
@@ -131,9 +141,18 @@ public class Notespeedslider : MonoBehaviour
         }
     }
 
-    void Volumeinput(string inp)
+    public void Volumeinput(string inp)
     {
+        if (float.TryParse(inp, out float input) && ((float.Parse(inp))) >= ofse.minValue && ((float.Parse(inp))) <= ofse.maxValue)
+        {
+            GameManager.volume = input;
 
+            vosp.value = input;
+        }
+        else
+        {
+            volenter.text = GameManager.volume.ToString("F1") + "%";
+        }
     }
 
 }

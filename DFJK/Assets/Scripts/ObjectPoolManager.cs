@@ -12,6 +12,9 @@ public class ObjectPoolManager : MonoBehaviour
 
     void Awake()
     {
+        DontDestroyOnLoad(this.gameObject);
+
+        index = 0;
         pools = new List<GameObject>[prefabs.Length]; //프리펩 로딩 개수의 크기만큼 pool 크기 설정
 
         for (index = 0; index < pools.Length; index++){
@@ -20,6 +23,12 @@ public class ObjectPoolManager : MonoBehaviour
     }
     public GameObject Get(int anchovy, int panju)//(index, anchovy, panju) = (노트의 색, 라인, 인풋지점)
     {
+        if (pools == null || prefabs == null)
+        {
+            Debug.Log("ObjectPoolManager가 초기화되지 않았습니다!");
+            return null;
+        }
+
         GameObject select = null;
         index = (int)Math.Floor((double)Math.Abs(anchovy - 1.5)); // 0123에 1001로 대응
         
@@ -47,6 +56,12 @@ public class ObjectPoolManager : MonoBehaviour
 
     public GameObject LongGet(int anchovy, int panju, int endpanju)
     {
+        if (pools == null || prefabs == null)
+        {
+            Debug.Log("ObjectPoolManager가 초기화되지 않았습니다!");
+            return null;
+        }
+
         GameObject selectbase = null;
         index = (int)Math.Floor((double)Math.Abs(anchovy - 1.5)); // 0123에 1001으로 대응; 롱노트는 +2해서 사용
         // 롱노트

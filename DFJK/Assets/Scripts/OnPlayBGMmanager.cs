@@ -12,6 +12,7 @@ public class OnPlayBGMmanager : MonoBehaviour
         Debug.Log(Iamaudio);
         audiosource = GetComponent<AudioSource>();
         audiosource.clip = Resources.Load<AudioClip>(Iamaudio);
+        audiosource.volume = GameManager.volume;
     }
     public IEnumerator PlayMusic()
     {

@@ -28,6 +28,18 @@ public class NotesCreate : MonoBehaviour
 
     void Awake()
     {
+        if (pool == null)
+        {
+            pool = FindObjectOfType<ObjectPoolManager>();
+            if (pool == null)
+            {
+                Debug.LogError("ObjectPoolManager를 찾을 수 없습니다!");
+            }
+        }
+        nowms = -1;
+        GameManager.resums = -4000;
+        End = false;
+        StopAllCoroutines();
         wit = 0;
         spoint = 0;
         spoint = 0;

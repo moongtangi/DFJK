@@ -21,13 +21,13 @@ public class GameManager : MonoBehaviour
     private Stopwatch stopwatch = new Stopwatch();
     public bool resume;
 
+    public static float volume = 100;
+
     public GameObject BGMmanager;
 
     void Awake()
     {
         instance = this;
-        NotesCreate.nowms = -1;
-        resums = -4000; //초반 기본 오프셋같은 느낌
 
         StartCoroutine(BGMmanager.GetComponent<OnPlayBGMmanager>().PlayMusic());
     }
