@@ -59,8 +59,9 @@ public class Notes : MonoBehaviour
     {
         if (!longNoteProcessing)// 단노트, 손을 놓은 롱노트의 경우
         {
-            transform.position = new Vector3(notePosition[line], (-3 + (GameManager.notespeed)*(panjung - NotesCreate.nowms)/1000), (endpanjung == 0) ? 0 : 0.25f);
-            if (transform.position.y < -5f){GetComponent<Renderer>().enabled = false;}
+            transform.position = new Vector3(notePosition[line], (-3 + (GameManager.notespeed)*(panjung - NotesCreate.nowms)/1000),
+            ((endpanjung == 0) ? 0 : 0.4f)); // 롱노트면 단놋 하나 크기만큼 키워야함
+            //if (transform.position.y < -5f){GetComponent<Renderer>().enabled = false;}
 
             if (panjung - NotesCreate.nowms < -250)
             {
@@ -72,7 +73,7 @@ public class Notes : MonoBehaviour
                     NoteOver(true);
                 else
                 {
-                    transform.position = new Vector3(notePosition[line], -2.68f, 0);
+                    transform.position = new Vector3(notePosition[line], -2.68f, 0);//아니 이거 고쳐야하는데 시간없네 뭔지알고싶으면 기어 한겹 벗겨서 봐봐
                     transform.localScale = new Vector3(1, (endpanjung-NotesCreate.nowms)*GameManager.notespeed/250);
                     if (transform.localScale.y <= 0)
                     {
@@ -84,7 +85,7 @@ public class Notes : MonoBehaviour
         else // 처리중인 롱노트의 경우
         {
             transform.position = new Vector3(notePosition[line], -2.462f, 0);
-            transform.localScale = new Vector3(1, (endpanjung-NotesCreate.nowms)*GameManager.notespeed/250-2);
+            transform.localScale = new Vector3(1, (endpanjung-NotesCreate.nowms)*GameManager.notespeed/250-2);//-2빼면 (1, 0.25)기준 맞음
             if (transform.localScale.y <= 0)
             {
                 PC.Perfect(this.gameObject);
