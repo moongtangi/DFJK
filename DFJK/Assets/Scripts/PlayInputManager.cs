@@ -10,6 +10,13 @@ public class PlayInputManager : MonoBehaviour
     public List<GameObject> an1 = new List<GameObject>();
     public List<GameObject> an2 = new List<GameObject>();
     public List<GameObject> an3 = new List<GameObject>();
+    public PanjungChang PC;
+
+    void Awake()
+    {
+        GameObject pan = GameObject.Find("Panjung");
+        PC = pan.GetComponent<PanjungChang>();
+    }
 
     public void KnKey0(InputAction.CallbackContext context)
     {
@@ -21,11 +28,11 @@ public class PlayInputManager : MonoBehaviour
                 if (nanahira < 100)
                 {
                     if (-50 < nanahira && nanahira < 50)
-                        Debug.Log($"PERFΞCT where {index.GetComponent<Notes>().panjung}, line 0");
+                        PC.Perfect(index);
                     else if (nanahira > 50 || (-100 < nanahira && nanahira < -50))
-                        Debug.Log($"GRΣAT where {index.GetComponent<Notes>().panjung}, line 0");
+                        PC.Great(index);
                     else
-                        Debug.Log($"B∀D where {index.GetComponent<Notes>().panjung}, line 0");
+                        PC.Bad(index);
 
                     //단노트 판정 성공: NoteOver 함수 실행
                     if (index.GetComponent<Notes>().endpanjung == 0)
@@ -67,11 +74,11 @@ public class PlayInputManager : MonoBehaviour
                 if (nanahira < 100)
                 {
                     if (-50 < nanahira && nanahira < 50)
-                        Debug.Log($"PERFΞCT where {index.GetComponent<Notes>().panjung}, line 1");
+                        PC.Perfect(index);
                     else if (nanahira > 50 || (-100 < nanahira && nanahira < -50))
-                        Debug.Log($"GRΣAT where {index.GetComponent<Notes>().panjung}, line 1");
+                        PC.Great(index);
                     else
-                        Debug.Log($"B∀D where {index.GetComponent<Notes>().panjung}, line 1");
+                        PC.Bad(index);
 
                     //단노트 판정 성공: NoteOver 함수 실행
                     if (index.GetComponent<Notes>().endpanjung == 0)
@@ -111,11 +118,11 @@ public class PlayInputManager : MonoBehaviour
                 if (nanahira < 100)
                 {
                     if (-50 < nanahira && nanahira < 50)
-                        Debug.Log($"PERFΞCT where {index.GetComponent<Notes>().panjung}, line 2");
+                        PC.Perfect(index);
                     else if (nanahira > 50 || (-100 < nanahira && nanahira < -50))
-                        Debug.Log($"GRΣAT where {index.GetComponent<Notes>().panjung}, line 2");
+                        PC.Great(index);
                     else
-                        Debug.Log($"B∀D where {index.GetComponent<Notes>().panjung}, line2");
+                        PC.Bad(index);
 
                     //단노트 판정 성공: NoteOver 함수 실행
                     if (index.GetComponent<Notes>().endpanjung == 0)
@@ -155,11 +162,11 @@ public class PlayInputManager : MonoBehaviour
                 if (nanahira < 100)
                 {
                     if (-50 < nanahira && nanahira < 50)
-                        Debug.Log($"PERFΞCT where {index.GetComponent<Notes>().panjung}, line3");
+                        PC.Perfect(index);
                     else if (nanahira > 50 || (-100 < nanahira && nanahira < -50))
-                        Debug.Log($"GRΣAT where {index.GetComponent<Notes>().panjung}, line 3");
+                        PC.Great(index);
                     else
-                        Debug.Log($"B∀D where {index.GetComponent<Notes>().panjung}, line 3");
+                        PC.Bad(index);
 
                     //단노트 판정 성공: NoteOver 함수 실행
                     if (index.GetComponent<Notes>().endpanjung == 0)
