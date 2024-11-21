@@ -37,7 +37,7 @@ public class ObjectPoolManager : MonoBehaviour
         }
 
         select.GetComponent<Notes>().line = anchovy;
-        select.GetComponent<Notes>().panjung = panju+ (int)(1000*8.387f/GameManager.notespeed);
+        select.GetComponent<Notes>().panjung = panju+ (int)(1000*8.462f/GameManager.notespeed);
         select.GetComponent<Notes>().endpanjung = 0;
         select.GetComponent<Notes>().panju = panju;
         select.GetComponent<Notes>().endpanju = 0;
@@ -66,8 +66,8 @@ public class ObjectPoolManager : MonoBehaviour
         }
     
         selectbase.GetComponent<Notes>().line = anchovy;
-        selectbase.GetComponent<Notes>().panjung = panju + (int)(1000*8.268f/GameManager.notespeed);
-        selectbase.GetComponent<Notes>().endpanjung = endpanju + (int)(1000*8.268f/GameManager.notespeed);
+        selectbase.GetComponent<Notes>().panjung = panju + (int)(1000*8.462f/GameManager.notespeed);
+        selectbase.GetComponent<Notes>().endpanjung = endpanju + (int)(1000*8.462f/GameManager.notespeed);
         selectbase.GetComponent<Notes>().panju = panju;
         selectbase.GetComponent<Notes>().endpanju = endpanju;
         selectbase.GetComponent<Renderer>().enabled = true;
