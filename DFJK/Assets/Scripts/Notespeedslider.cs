@@ -5,17 +5,18 @@ using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using TMPro;
 using static UnityEngine.Rendering.DebugUI;
 
 public class Notespeedslider : MonoBehaviour
 {
 
-    public InputField nospenter;
+    public TMP_InputField nospenter;
     public UnityEngine.UI.Slider nosp;
-    public InputField ofseenter;
+    public TMP_InputField ofseenter;
     public UnityEngine.UI.Slider ofse;
 
-    public InputField volenter;
+    public TMP_InputField volenter;
     public UnityEngine.UI.Slider vosp;
 
     public InputActionAsset inputActions;
@@ -30,7 +31,7 @@ public class Notespeedslider : MonoBehaviour
         {Key.Knkey3, KeyCode.K}
     }; // keys라는 dictionary 생성과 동시에 각 키에 기본키 DFJK 삽입
     int ki = -1;
-    public Text[] txt;  // 커스텀 키 만들때 뜨는 텍스트 정의
+    public TMP_Text[] txt;  // 커스텀 키 만들때 뜨는 텍스트 정의
     bool isKeyAlreadyAssigned;
     public void Start()
     {
