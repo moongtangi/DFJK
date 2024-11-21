@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Notes : MonoBehaviour
 {
-    public readonly float[] notePosition = { -1.5f, -0.5f, 0.5f, 1.5f };
+    public readonly float[] notePosition = { -1.82f, -0.68f, 0.45f, 1.6f };
     public int line;
     public int panjung;
     public int endpanjung;
@@ -17,6 +17,7 @@ public class Notes : MonoBehaviour
     public bool owari = false;
 
     PlayInputManager PIM;
+    PanjungChang PC;
 
     void Awake()
     {
@@ -24,8 +25,10 @@ public class Notes : MonoBehaviour
         owari = false;
         GetComponent<Renderer>().enabled = true;
         endpanjung = 0;
+        GameObject pan = GameObject.Find("Panjung");
         GameObject mang = GameObject.Find("El_Fail");
         PIM = mang.GetComponent<PlayInputManager>();
+        PC = pan.GetComponent<PanjungChang>();
     }
     public void SizeJojul()
     {
@@ -56,18 +59,20 @@ public class Notes : MonoBehaviour
     {
         if (!longNoteProcessing)// 단노트, 손을 놓은 롱노트의 경우
         {
-            transform.position = new Vector3(notePosition[line], (-3 + (GameManager.notespeed)*(panjung - NotesCreate.nowms)/1000), 0);
-            if (transform.position.y < -5)
+            transform.position = new Vector3(notePosition[line], (-3 + (GameManager.notespeed)*(panjung - NotesCreate.nowms)/1000), (endpanjung == 0) ? 0 : 0.25f);
+            if (transform.position.y < -5f){GetComponent<Renderer>().enabled = false;}
+
+            if (panjung - NotesCreate.nowms < -250)
             {
                 if (!owari)
-                    Debug.Log($"ΛΛISS where {panjung}, line {line}");
+                    PC.Miss(this.gameObject);
                 owari = true;
 
                 if (endpanjung == 0)
                     NoteOver(true);
                 else
                 {
-                    transform.position = new Vector3(notePosition[line], -5, 0);
+                    transform.position = new Vector3(notePosition[line], -2.68f, 0);
                     transform.localScale = new Vector3(1, (endpanjung-NotesCreate.nowms)*GameManager.notespeed/250);
                     if (transform.localScale.y <= 0)
                     {
@@ -78,11 +83,11 @@ public class Notes : MonoBehaviour
         }
         else // 처리중인 롱노트의 경우
         {
-            transform.position = new Vector3(notePosition[line], -3, 0);
-            transform.localScale = new Vector3(1, (endpanjung-NotesCreate.nowms)*GameManager.notespeed/250);
+            transform.position = new Vector3(notePosition[line], -2.462f, 0);
+            transform.localScale = new Vector3(1, (endpanjung-NotesCreate.nowms)*GameManager.notespeed/250-2);
             if (transform.localScale.y <= 0)
             {
-                Debug.Log($"PERFΞCT where {panjung}, line {line}");
+                PC.Perfect(this.gameObject);
                 owari = true;
                 NoteOver(true);
             }
