@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;    
+using TMPro;
+using System.Reflection;
+using UnityEditor.Animations;
 
 public class GameManager : MonoBehaviour
 {
     public NotesCreate Create;
     public static GameManager instance;
     public GameObject Pausemenu;
-    public Text Countdown;
+    public TMP_Text Countdown;
 
     public static float notespeed = 11.4f;
     public static float offset = 0f;
@@ -21,6 +23,10 @@ public class GameManager : MonoBehaviour
     private Stopwatch stopwatch = new Stopwatch();
     public bool resume;
 
+    public static Sprite ImageFile;
+    public GameObject backG;
+    public static float volume;
+
     public GameObject BGMmanager;
 
     void Awake()
@@ -29,6 +35,8 @@ public class GameManager : MonoBehaviour
         resums = -4000; //초반 기본 오프셋같은 느낌
 
         StartCoroutine(BGMmanager.GetComponent<OnPlayBGMmanager>().PlayMusic());
+        backG.GetComponent<Image>().sprite = ImageFile;
+
     }
 
     void Update()
