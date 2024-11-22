@@ -26,11 +26,11 @@ public class PlayInputManager : MonoBehaviour
                 // 빨리 치면 +
                 int nanahira = index.GetComponent<Notes>().panjung-NotesCreate.nowms;
 
-                if (nanahira < 200)
+                if (nanahira < 300 && !index.GetComponent<Notes>().owari)
                 {
                     if (-50 < nanahira && nanahira < 50)
                         PC.Perfect(index);
-                    else if (-200 < nanahira)
+                    else if (-200 < nanahira && nanahira < 200)
                         PC.Great(index);
                     else
                         PC.Bad(index);
@@ -58,6 +58,7 @@ public class PlayInputManager : MonoBehaviour
                     if (sasakure > 150)
                     {
                         Debug.Log(sasakure);
+                        index.GetComponent<Notes>().owari = true;
                         index.GetComponent<Notes>().longNoteProcessing = false;
                     }
                 }
@@ -72,11 +73,11 @@ public class PlayInputManager : MonoBehaviour
             {
                 int nanahira = index.GetComponent<Notes>().panjung-NotesCreate.nowms;
 
-                if (nanahira < 200)
+                if (nanahira < 300 && !index.GetComponent<Notes>().owari)
                 {
                     if (-50 < nanahira && nanahira < 50)
                         PC.Perfect(index);
-                    else if (-200 < nanahira)
+                    else if (-200 < nanahira && nanahira < 200)
                         PC.Great(index);
                     else
                         PC.Bad(index);
@@ -102,6 +103,7 @@ public class PlayInputManager : MonoBehaviour
                     
                     if (sasakure > 150)
                     {
+                        index.GetComponent<Notes>().owari = true;
                         index.GetComponent<Notes>().longNoteProcessing = false;
                     }
                 }
@@ -116,11 +118,11 @@ public class PlayInputManager : MonoBehaviour
             {
                 int nanahira = index.GetComponent<Notes>().panjung-NotesCreate.nowms;
 
-                if (nanahira < 200)
+                if (nanahira < 300 && !index.GetComponent<Notes>().owari)
                 {
                     if (-50 < nanahira && nanahira < 50)
                         PC.Perfect(index);
-                    else if (-200 < nanahira)
+                    else if (-200 < nanahira && nanahira < 200)
                         PC.Great(index);
                     else
                         PC.Bad(index);
@@ -146,6 +148,8 @@ public class PlayInputManager : MonoBehaviour
                     
                     if (sasakure > 150)
                     {
+                        PC.Miss(index);
+                        index.GetComponent<Notes>().owari = true;
                         index.GetComponent<Notes>().longNoteProcessing = false;
                     }
                 }
@@ -160,11 +164,11 @@ public class PlayInputManager : MonoBehaviour
             {
                 int nanahira = index.GetComponent<Notes>().panjung-NotesCreate.nowms;
 
-                if (nanahira < 200)
+                if (nanahira < 300 && !index.GetComponent<Notes>().owari)
                 {
                     if (-50 < nanahira && nanahira < 50)
                         PC.Perfect(index);
-                    else if (-200 < nanahira)
+                    else if (-200 < nanahira && nanahira < 200)
                         PC.Great(index);
                     else
                         PC.Bad(index);
@@ -190,6 +194,7 @@ public class PlayInputManager : MonoBehaviour
                     
                     if (sasakure > 150)
                     {
+                        index.GetComponent<Notes>().owari = true;
                         index.GetComponent<Notes>().longNoteProcessing = false;
                     }
                 }

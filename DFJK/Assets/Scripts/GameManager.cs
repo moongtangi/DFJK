@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        resums = -4000; //초반 기본 오프셋같은 느낌
+         //초반 기본 오프셋같은 느낌
 
         StartCoroutine(BGMmanager.GetComponent<OnPlayBGMmanager>().PlayMusic());
         backG.GetComponent<Image>().sprite = ImageFile;

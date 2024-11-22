@@ -30,12 +30,27 @@ public class NotesCreate : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log(FilePath);
-        pattern = new List<string>(File.ReadAllLines(FilePath)); /* 패턴 파일 읽어옴 */
-        i = pattern.LastIndexOf("[HitObjects]") + 1;
-        Debug.Log(i);
-        StartCoroutine(Placer()); /* IEnumerator Placer() 시작 */
-        stopwatch.Start(); // ms 시작
+        if (pool == null)
+{
+    pool = FindObjectOfType<ObjectPoolManager>();
+    if (pool == null)
+    {
+        Debug.LogError("ObjectPoolManager를 찾을 수 없습니다!");
+    }
+}
+nowms = -1;
+GameManager.resums = -4000;
+End = false;
+StopAllCoroutines();
+wit = 0;
+spoint = 0;
+spoint = 0;
+Debug.Log(FilePath);
+pattern = new List<string>(File.ReadAllLines(FilePath)); /* 패턴 파일 읽어옴 */
+i = pattern.LastIndexOf("[HitObjects]") + 1;
+Debug.Log(i);
+StartCoroutine(Placer()); /* IEnumerator Placer() 시작 */
+stopwatch.Start(); // ms 시작
     }
 
     void Update()

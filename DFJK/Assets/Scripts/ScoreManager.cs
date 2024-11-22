@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -10,8 +11,7 @@ public class ScoreManager : MonoBehaviour
     public TMP_Text gre;
     public TMP_Text bad;
     public TMP_Text mis;
-
-    public int perNum, greNum, badNum, misNum, combo;
+    
     public double accuracy;
 
     public Sprite[] rankSprites;
@@ -19,16 +19,13 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
-        acu.text = accuracy.ToString();
-        per.text = perNum.ToString();
-        gre.text = greNum.ToString();
-        bad.text = badNum.ToString();
-        mis.text = misNum.ToString();
+        accuracy = Math.Round(PanjungChang.accuracy, 2);
+        acu.text = accuracy.ToString() + "%";
+        per.text = PanjungChang.perNum.ToString();
+        gre.text = PanjungChang.greNum.ToString();
+        bad.text = PanjungChang.badNum.ToString();
+        mis.text = PanjungChang.misNum.ToString();
 
-        accuracy = 97;
-
-        if (accuracy == 100)
-            rank = rankSprites[6];//퍼펙트이미지
         if (accuracy>=96)
             rank = rankSprites[0];
         else if (accuracy>=92)

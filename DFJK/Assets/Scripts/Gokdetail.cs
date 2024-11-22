@@ -13,6 +13,7 @@ public class Gokdetail : MonoBehaviour
     public List<string> DifficultyFile = new List<string>(new string[5]);
     public string imageFile;
     public string audioFile;
+    public string BackGFile;
 
     void Start()
     {
@@ -20,6 +21,7 @@ public class Gokdetail : MonoBehaviour
         audiosource = GetComponent<AudioSource>();
         audiosource.clip = Resources.Load<AudioClip>(audioFile);
         imageFile = Path.Combine(myfolder, "image.png");
+        BackGFile = Path.Combine(myfolder, "BEGEH.jpg");
 
         string[] cheboFiles = Directory.GetFiles(myfolder, "*.osu");
 

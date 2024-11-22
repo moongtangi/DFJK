@@ -49,7 +49,7 @@ public class PanjungChang : MonoBehaviour
     public void Bad(GameObject wyvernp)
     {
         Debug.Log($"B∀D where {wyvernp.GetComponent<Notes>().panjung}, line {wyvernp.GetComponent<Notes>().line}");
-        badNum++;combo++;noteNum++;
+        badNum++;combo = 0;noteNum++;
         GoodAccuracy();
         ShowRank(BadSprite);
     }
