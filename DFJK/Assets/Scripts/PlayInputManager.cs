@@ -10,22 +10,30 @@ public class PlayInputManager : MonoBehaviour
     public List<GameObject> an1 = new List<GameObject>();
     public List<GameObject> an2 = new List<GameObject>();
     public List<GameObject> an3 = new List<GameObject>();
+    public PanjungChang PC;
+
+    void Awake()
+    {
+        GameObject pan = GameObject.Find("ShinChangSup");
+        PC = pan.GetComponent<PanjungChang>();
+    }
 
     public void KnKey0(InputAction.CallbackContext context)
     {
         if (context.started)
             foreach (GameObject index in an0)
             {
+                // 빨리 치면 +
                 int nanahira = index.GetComponent<Notes>().panjung-NotesCreate.nowms;
 
-                if (nanahira < 100)
+                if (nanahira < 300 && !index.GetComponent<Notes>().owari)
                 {
                     if (-50 < nanahira && nanahira < 50)
-                        Debug.Log($"PERFΞCT where {index.GetComponent<Notes>().panjung}, line 0");
-                    else if (nanahira > 50 || (-100 < nanahira && nanahira < -50))
-                        Debug.Log($"GRΣAT where {index.GetComponent<Notes>().panjung}, line 0");
+                        PC.Perfect(index);
+                    else if (-200 < nanahira && nanahira < 200)
+                        PC.Great(index);
                     else
-                        Debug.Log($"B∀D where {index.GetComponent<Notes>().panjung}, line 0");
+                        PC.Bad(index);
 
                     //단노트 판정 성공: NoteOver 함수 실행
                     if (index.GetComponent<Notes>().endpanjung == 0)
@@ -50,6 +58,7 @@ public class PlayInputManager : MonoBehaviour
                     if (sasakure > 150)
                     {
                         Debug.Log(sasakure);
+                        index.GetComponent<Notes>().owari = true;
                         index.GetComponent<Notes>().longNoteProcessing = false;
                     }
                 }
@@ -64,14 +73,14 @@ public class PlayInputManager : MonoBehaviour
             {
                 int nanahira = index.GetComponent<Notes>().panjung-NotesCreate.nowms;
 
-                if (nanahira < 100)
+                if (nanahira < 300 && !index.GetComponent<Notes>().owari)
                 {
                     if (-50 < nanahira && nanahira < 50)
-                        Debug.Log($"PERFΞCT where {index.GetComponent<Notes>().panjung}, line 1");
-                    else if (nanahira > 50 || (-100 < nanahira && nanahira < -50))
-                        Debug.Log($"GRΣAT where {index.GetComponent<Notes>().panjung}, line 1");
+                        PC.Perfect(index);
+                    else if (-200 < nanahira && nanahira < 200)
+                        PC.Great(index);
                     else
-                        Debug.Log($"B∀D where {index.GetComponent<Notes>().panjung}, line 1");
+                        PC.Bad(index);
 
                     //단노트 판정 성공: NoteOver 함수 실행
                     if (index.GetComponent<Notes>().endpanjung == 0)
@@ -94,6 +103,7 @@ public class PlayInputManager : MonoBehaviour
                     
                     if (sasakure > 150)
                     {
+                        index.GetComponent<Notes>().owari = true;
                         index.GetComponent<Notes>().longNoteProcessing = false;
                     }
                 }
@@ -108,14 +118,14 @@ public class PlayInputManager : MonoBehaviour
             {
                 int nanahira = index.GetComponent<Notes>().panjung-NotesCreate.nowms;
 
-                if (nanahira < 100)
+                if (nanahira < 300 && !index.GetComponent<Notes>().owari)
                 {
                     if (-50 < nanahira && nanahira < 50)
-                        Debug.Log($"PERFΞCT where {index.GetComponent<Notes>().panjung}, line 2");
-                    else if (nanahira > 50 || (-100 < nanahira && nanahira < -50))
-                        Debug.Log($"GRΣAT where {index.GetComponent<Notes>().panjung}, line 2");
+                        PC.Perfect(index);
+                    else if (-200 < nanahira && nanahira < 200)
+                        PC.Great(index);
                     else
-                        Debug.Log($"B∀D where {index.GetComponent<Notes>().panjung}, line2");
+                        PC.Bad(index);
 
                     //단노트 판정 성공: NoteOver 함수 실행
                     if (index.GetComponent<Notes>().endpanjung == 0)
@@ -138,6 +148,8 @@ public class PlayInputManager : MonoBehaviour
                     
                     if (sasakure > 150)
                     {
+                        PC.Miss(index);
+                        index.GetComponent<Notes>().owari = true;
                         index.GetComponent<Notes>().longNoteProcessing = false;
                     }
                 }
@@ -152,14 +164,14 @@ public class PlayInputManager : MonoBehaviour
             {
                 int nanahira = index.GetComponent<Notes>().panjung-NotesCreate.nowms;
 
-                if (nanahira < 100)
+                if (nanahira < 300 && !index.GetComponent<Notes>().owari)
                 {
                     if (-50 < nanahira && nanahira < 50)
-                        Debug.Log($"PERFΞCT where {index.GetComponent<Notes>().panjung}, line3");
-                    else if (nanahira > 50 || (-100 < nanahira && nanahira < -50))
-                        Debug.Log($"GRΣAT where {index.GetComponent<Notes>().panjung}, line 3");
+                        PC.Perfect(index);
+                    else if (-200 < nanahira && nanahira < 200)
+                        PC.Great(index);
                     else
-                        Debug.Log($"B∀D where {index.GetComponent<Notes>().panjung}, line 3");
+                        PC.Bad(index);
 
                     //단노트 판정 성공: NoteOver 함수 실행
                     if (index.GetComponent<Notes>().endpanjung == 0)
@@ -182,13 +194,11 @@ public class PlayInputManager : MonoBehaviour
                     
                     if (sasakure > 150)
                     {
-
+                        index.GetComponent<Notes>().owari = true;
                         index.GetComponent<Notes>().longNoteProcessing = false;
                     }
                 }
             }
         }
     }
-
-
 }

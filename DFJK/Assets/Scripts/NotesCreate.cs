@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System;
 using Debug = UnityEngine.Debug;
-using UnityEditor;
+using UnityEngine.SceneManagement;
 
 public class NotesCreate : MonoBehaviour
 {
@@ -13,6 +13,7 @@ public class NotesCreate : MonoBehaviour
     // 소소한 변수
     int i = 0; // 패턴 한 줄씩 읽기용 for용 i
     private bool End = false; // 파일 읽기 종료 시
+    string 파일다읽었는지아닌지판단하는변수;
     
     //패턴 관련
     List<string> pattern = new List<string>(); // pattern 저장용 List
@@ -24,16 +25,32 @@ public class NotesCreate : MonoBehaviour
     //시간 관련
     public static int nowms = -1;
     public Stopwatch stopwatch = new Stopwatch(); // ms를 구현할 수 있는 정확한 stopwatch 생성
-    public static string FilePath = @"Assets/Resources/Patterns/pattern1.txt";
+    public static string FilePath = "Patterns/pattern1";
 
     void Awake()
     {
-        Debug.Log(FilePath);
-        pattern = new List<string>(File.ReadAllLines(FilePath)); /* 패턴 파일 읽어옴 */
-        i = pattern.LastIndexOf("[HitObjects]") + 1;
-        Debug.Log(i);
-        StartCoroutine(Placer()); /* IEnumerator Placer() 시작 */
-        stopwatch.Start(); // ms 시작
+        if (pool == null)
+{
+    pool = FindObjectOfType<ObjectPoolManager>();
+    if (pool == null)
+    {
+        Debug.LogError("ObjectPoolManager를 찾을 수 없습니다!");
+    }
+}
+nowms = -1;
+GameManager.resums = -4000;
+End = false;
+StopAllCoroutines();
+wit = 0;
+spoint = 0;
+spoint = 0;
+Debug.Log(FilePath);
+TextAsset chart = Resources.Load<TextAsset>(FilePath);
+pattern = new List<string>(chart.text.Split(new[] { "\r\n", "\n" }, System.StringSplitOptions.None));/* 패턴 파일 읽어옴 */
+i = pattern.LastIndexOf("[HitObjects]") + 1;
+Debug.Log(i);
+StartCoroutine(Placer()); /* IEnumerator Placer() 시작 */
+stopwatch.Start(); // ms 시작
     }
 
     void Update()
@@ -43,10 +60,17 @@ public class NotesCreate : MonoBehaviour
 
     IEnumerator Placer()
     {
-        if (pattern[i] == "")
+        try{파일다읽었는지아닌지판단하는변수 = pattern[i];}
+        catch (ArgumentOutOfRangeException)
+        {
             StopCoroutine("Placer");
+            Invoke("gameEnd", 3);
+            yield break;
+        }
+
         string[] parts = pattern[i].Split(',');
         // wit: 노트의 라인 // spoint: 노트의 위치(혹은 롱노트의 시점) // epoint(롱노트): 롱노트의 종점
+        if (parts.Length < 6) { Invoke("gameEnd", 3); yield break; }
 
         if (parts[5] == "0:0:0:0:") // 단노트 형식: (숫자1),(숫자2),(숫자3),(숫자4),0,0:0:0:0:
         {
@@ -61,7 +85,6 @@ public class NotesCreate : MonoBehaviour
             epoint = int.Parse(parts[5].Split(':')[0]);
             IamLongNote = true;
         }
-        else { /*End = true; 이거 End하면 다음노트 못읽어 수정해야해*/ } // 노트 형식이 아닌 입력이 들어왔을 때(e.g. [HitObjects]). 이후에 수정.
 
         while (spoint >= nowms)
         {
@@ -77,6 +100,10 @@ public class NotesCreate : MonoBehaviour
             i++;
             StartCoroutine(Placer());
         }
-        
+    }
+
+    void gameEnd()
+    {
+        SceneManager.LoadScene("ScoreScene");
     }
 }
