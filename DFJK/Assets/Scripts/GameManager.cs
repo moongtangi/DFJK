@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Reflection;
-using UnityEditor.Animations;
 
 public class GameManager : MonoBehaviour
 {
@@ -73,7 +72,7 @@ public class GameManager : MonoBehaviour
         Pausemenu.SetActive(true);
         BGMmanager.GetComponent<OnPlayBGMmanager>().PauseMusic();
     }
-    void DePause() //일시정지 해제
+    public void DePause() //일시정지 해제
     {
         pause = false;
         stopwatch.Start();  // 3초 카운트다운 시작

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEditor;
-using UnityEditor.MemoryProfiler;
 using UnityEngine;
 
 public class Notes : MonoBehaviour

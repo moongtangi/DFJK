@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using UnityEngine;
-using UnityEngine.WSA;
 
 public class Gokdetail : MonoBehaviour
 {
@@ -17,17 +16,18 @@ public class Gokdetail : MonoBehaviour
 
     void Start()
     {
-        audioFile = "Patterns/" + Path.GetFileName(myfolder) + "/audio";
+        audioFile = "Patterns/" + myfolder + "/audio";
         audiosource = GetComponent<AudioSource>();
         audiosource.clip = Resources.Load<AudioClip>(audioFile);
-        imageFile = Path.Combine(myfolder, "image.png");
-        BackGFile = Path.Combine(myfolder, "BEGEH.jpg");
+        imageFile = "Patterns/" + myfolder + "/image";
+        BackGFile = "Patterns/" + myfolder + "/BEGEH";
 
-        string[] cheboFiles = Directory.GetFiles(myfolder, "*.osu");
+        TextAsset[] cheboFiles = Resources.LoadAll<TextAsset>("Patterns/" + myfolder);
 
-        foreach (string file in cheboFiles)
+        foreach (TextAsset chart in cheboFiles)
         {
-            string difficulty = difficulty_check(Path.GetFileName(file));
+            string difficulty = difficulty_check(chart.name);
+            string file = "Patterns/" + myfolder + "/" + chart.name;
 
             switch (difficulty.ToLower())
             {
